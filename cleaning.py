@@ -11,6 +11,11 @@ def clean_currency(series):
     )
 
 
+def clean_license(series):
+    """Keep combined license details in one readable value."""
+    return series.str.replace("<br />", "; ", regex=False)
+
+
 def convert_tf_to_boolean(series):
     """Convert Airbnb t/f values to nullable Boolean values."""
     return series.map({"t": True, "f": False}).astype("boolean")

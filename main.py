@@ -6,6 +6,7 @@ import geopandas as gpd
 
 from cleaning import (
     clean_currency,
+    clean_license,
     convert_tf_to_boolean,
     convert_to_datetime,
 )
@@ -55,6 +56,8 @@ listings = listings.drop(columns=[
     'instant_bookable' #nan
     ])        
 
+listings['license'] = clean_license(listings['license'])
+
 # Convert currency-formatted prices and verify populated values were preserved.
 original_price = listings['price'].copy()
 listings['price'] = clean_currency(listings['price'])
@@ -83,23 +86,9 @@ for column in listing_date_columns:
 print('Price dtype:', listings['price'].dtype)
 print('Failed populated price conversions:', failed_price_conversion.sum())
 
-assert pd.api.types.is_numeric_dtype(listings['price'])
-assert failed_price_conversion.sum() == 0
-assert all(
-    pd.api.types.is_bool_dtype(listings[column])
-    for column in listing_boolean_columns
-)
-assert all(
-    pd.api.types.is_datetime64_any_dtype(listings[column])
-    for column in listing_date_columns
-)
-
-
 # Calendar
 calendar.drop_duplicates(inplace=True)
 calendar['date'] = convert_to_datetime(calendar['date'])
-
-assert pd.api.types.is_datetime64_any_dtype(calendar['date'])
 
 # aggregate calendar dataframe: count num trues and num falses (idk why jeff wants this)
 calendar_tf = calendar.groupby('listing_id').agg(
@@ -125,8 +114,6 @@ reviews_tf = reviews.groupby('listing_id').agg(
 
 print(reviews_tf)
 
-assert pd.api.types.is_datetime64_any_dtype(reviews['date'])
-
 # Neighbourhoods
 neighbourhoods.drop_duplicates(inplace=True)
 neighbourhoods = neighbourhoods.drop(columns=['neighbourhood_group'])
@@ -134,4 +121,25 @@ neighbourhoods = neighbourhoods.drop(columns=['neighbourhood_group'])
 final_df = pd.merge(listings, calendar_tf, how='left', left_on='id', right_on='listing_id')
 final_df = pd.merge(final_df, reviews_tf, how='left', left_on='id', right_on='listing_id')
 final_df = pd.merge(final_df, neighbourhoods, how='left', left_on='neighbourhood_cleansed', right_on='neighbourhood')
+
+# =============================================================================
+# Data Validation
+# =============================================================================
+
+assert pd.api.types.is_numeric_dtype(listings['price'])
+assert failed_price_conversion.sum() == 0
+assert all(
+    pd.api.types.is_bool_dtype(listings[column])
+    for column in listing_boolean_columns
+)
+assert all(
+    pd.api.types.is_datetime64_any_dtype(listings[column])
+    for column in listing_date_columns
+)
+assert pd.api.types.is_datetime64_any_dtype(calendar['date'])
+assert pd.api.types.is_datetime64_any_dtype(reviews['date'])
+assert 'license' in listings.columns
+assert 'license' in final_df.columns
+assert not final_df['license'].str.contains('<br />', regex=False, na=False).any()
+
 print(final_df)
