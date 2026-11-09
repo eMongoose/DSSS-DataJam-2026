@@ -1,8 +1,14 @@
 # =============================================================================
 # Import libraries
 
-import pandas as pd 
+import pandas as pd
 import geopandas as gpd
+
+from cleaning import (
+    clean_currency,
+    convert_tf_to_boolean,
+    convert_to_datetime,
+)
 
 # =============================================================================
 # Read input files
@@ -52,9 +58,50 @@ listings = listings.drop(columns=[
     'instant_bookable' #nan
     ])        
 
+# Convert currency-formatted prices and verify populated values were preserved.
+original_price = listings['price'].copy()
+listings['price'] = clean_currency(listings['price'])
+failed_price_conversion = original_price.notna() & listings['price'].isna()
+
+# Convert Airbnb t/f indicators to nullable Boolean values.
+listing_boolean_columns = [
+    'host_is_superhost',
+    'host_identity_verified',
+    'has_availability',
+]
+
+for column in listing_boolean_columns:
+    listings[column] = convert_tf_to_boolean(listings[column])
+
+# Convert listing quote dates to datetime values.
+listing_date_columns = [
+    'price_quote_checkin_date',
+    'price_quote_checkout_date',
+]
+
+for column in listing_date_columns:
+    listings[column] = convert_to_datetime(listings[column])
+
+print('Price dtype:', listings['price'].dtype)
+print('Failed populated price conversions:', failed_price_conversion.sum())
+
+assert pd.api.types.is_numeric_dtype(listings['price'])
+assert failed_price_conversion.sum() == 0
+assert all(
+    pd.api.types.is_bool_dtype(listings[column])
+    for column in listing_boolean_columns
+)
+assert all(
+    pd.api.types.is_datetime64_any_dtype(listings[column])
+    for column in listing_date_columns
+)
+
 
 # Calendar
 calendar.drop_duplicates(inplace=True)
+calendar['date'] = convert_to_datetime(calendar['date'])
+
+assert pd.api.types.is_datetime64_any_dtype(calendar['date'])
 
 # aggregate calendar dataframe: count num trues and num falses (idk why jeff wants this)
 calendar_tf = calendar.groupby('listing_id').agg(
@@ -71,14 +118,20 @@ print(calendar_aggregated)
 
 # Reviews
 reviews.drop_duplicates(inplace=True)
+reviews['date'] = convert_to_datetime(reviews['date'])
 reviews = reviews.drop(columns=['id', 'reviewer_id'])
 
+<<<<<<< HEAD
 reviews_tf = reviews.groupby('listing_id').agg(
     review_count=("comments", "count"),
     latest_review_date=("date", "max")).reset_index()
 
 print(reviews_tf)
+=======
+assert pd.api.types.is_datetime64_any_dtype(reviews['date'])
+
+>>>>>>> 1fac0673667082e78fb052cd52b281a3f0d204a7
 
 # Neighbourhoods
 neighbourhoods.drop_duplicates(inplace=True)
-neighbourhoods = neighbourhoods.drop(columns=['neighbourhood_group']) 
+neighbourhoods = neighbourhoods.drop(columns=['neighbourhood_group'])
