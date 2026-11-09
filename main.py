@@ -73,6 +73,11 @@ print(calendar_aggregated)
 reviews.drop_duplicates(inplace=True)
 reviews = reviews.drop(columns=['id', 'reviewer_id'])
 
+reviews_tf = reviews.groupby('listing_id').agg(
+    review_count=("comments", "count"),
+    latest_review_date=("date", "max")).reset_index()
+
+print(reviews_tf)
 
 # Neighbourhoods
 neighbourhoods.drop_duplicates(inplace=True)
