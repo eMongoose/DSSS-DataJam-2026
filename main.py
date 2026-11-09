@@ -121,16 +121,14 @@ reviews.drop_duplicates(inplace=True)
 reviews['date'] = convert_to_datetime(reviews['date'])
 reviews = reviews.drop(columns=['id', 'reviewer_id'])
 
-<<<<<<< HEAD
 reviews_tf = reviews.groupby('listing_id').agg(
     review_count=("comments", "count"),
     latest_review_date=("date", "max")).reset_index()
 
 print(reviews_tf)
-=======
+
 assert pd.api.types.is_datetime64_any_dtype(reviews['date'])
 
->>>>>>> 1fac0673667082e78fb052cd52b281a3f0d204a7
 
 # Neighbourhoods
 neighbourhoods.drop_duplicates(inplace=True)
