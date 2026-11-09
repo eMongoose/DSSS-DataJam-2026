@@ -28,8 +28,6 @@ neighbourhoods = gpd.read_file('data/input/neighbourhoods.geojson')
 listings = listings.drop(columns=[
     'listing_url',#irrelevant
     'scrape_id', #irrelevant
-    'source', #metadata
-    'last_scraped', #irrelevant
     'name', #irrelevant
     'description', #irrelevant
     'neighborhood_overview', #nan
@@ -72,8 +70,9 @@ listing_boolean_columns = [
 for column in listing_boolean_columns:
     listings[column] = convert_tf_to_boolean(listings[column])
 
-# Convert listing quote dates to datetime values.
+# Convert listing dates to datetime values.
 listing_date_columns = [
+    'last_scraped',
     'price_quote_checkin_date',
     'price_quote_checkout_date',
 ]
