@@ -117,17 +117,31 @@ reviews_tf = reviews.groupby('listing_id').agg(
 print(reviews_tf)
 
 # Neighbourhoods
-neighbourhoods.drop_duplicates(inplace=True)
 neighbourhoods = neighbourhoods.drop(columns=['neighbourhood_group'])
+neighbourhoods = neighbourhoods.dissolve(
+    by='neighbourhood',
+    as_index=False,
+)
 
 final_df = pd.merge(listings, calendar_tf, how='left', left_on='id', right_on='listing_id')
 final_df = pd.merge(final_df, reviews_tf, how='left', left_on='id', right_on='listing_id')
-final_df = pd.merge(final_df, neighbourhoods, how='left', left_on='neighbourhood_cleansed', right_on='neighbourhood')
+final_df = pd.merge(
+    final_df,
+    neighbourhoods,
+    how='left',
+    left_on='neighbourhood_cleansed',
+    right_on='neighbourhood',
+    validate='many_to_one',
+)
 
 # =============================================================================
 # Data Validation
 # =============================================================================
 
+assert neighbourhoods['neighbourhood'].is_unique
+assert final_df['neighbourhood'].notna().all()
+assert len(final_df) == len(listings)
+assert final_df['id'].is_unique
 assert pd.api.types.is_numeric_dtype(listings['price'])
 assert failed_price_conversion.sum() == 0
 assert all(
