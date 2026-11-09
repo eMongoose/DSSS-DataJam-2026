@@ -6,9 +6,9 @@ import geopandas as gpd
 
 from cleaning import (
     clean_currency,
-    clean_license,
     convert_tf_to_boolean,
     convert_to_datetime,
+    derive_license_status,
 )
 
 # =============================================================================
@@ -56,7 +56,9 @@ listings = listings.drop(columns=[
     'instant_bookable' #nan
     ])        
 
-listings['license'] = clean_license(listings['license'])
+# Keep the useful license status without retaining license identifiers.
+listings['license_status'] = derive_license_status(listings['license'])
+listings.drop(columns=['license'], inplace=True)
 
 # Convert currency-formatted prices and verify populated values were preserved.
 original_price = listings['price'].copy()
@@ -138,8 +140,15 @@ assert all(
 )
 assert pd.api.types.is_datetime64_any_dtype(calendar['date'])
 assert pd.api.types.is_datetime64_any_dtype(reviews['date'])
-assert 'license' in listings.columns
-assert 'license' in final_df.columns
-assert not final_df['license'].str.contains('<br />', regex=False, na=False).any()
+assert 'license' not in listings.columns
+assert 'license' not in final_df.columns
+assert listings['license_status'].notna().all()
+assert set(listings['license_status'].unique()) == {
+    'licensed',
+    'exempt',
+    '30_day_minimum',
+    'missing',
+    'unknown',
+}
 
 print(final_df)
