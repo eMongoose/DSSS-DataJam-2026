@@ -12,7 +12,24 @@ def clean_currency(series):
 
 
 def derive_license_status(series):
-    """Replace raw license details with an anonymous status."""
+    """
+    Convert raw license text into more anonymous analyse categories. 
+    License compliance is an investment risk especially for short-term rentals in Vancouver.
+    This allows us to also compare estimated compliance patterns across neighbourhoods :D
+
+    Output:
+    A pandas Series of the same length as the input series, with values in
+    {"missing", "exempt", "licensed", "30_day_minimum", "unknown"}.
+
+    Example: 
+    - missing -> no value provided / value is empty
+    - "License 1234" -> licensed
+    - 30 day minimum -> 30_day_minimum
+    - "abcdef jeff" -> unknown
+    """
+
+    # Convert to pandas strings and remove surrounding whitespace
+    # Remove the "30 day minimum" text to avoid misclassifying licenses that contain a number
     license_text = series.astype("string").str.strip()
     license_without_minimum = license_text.str.replace(
         r"30\s*day\s*minimum", "", case=False, regex=True
