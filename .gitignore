@@ -3,6 +3,6 @@ data/output/*
 pip
 regions_map.html
 .env
-
+__pycache__/
 
 !.gitkeep
