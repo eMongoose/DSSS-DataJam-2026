@@ -96,12 +96,20 @@ calendar['date'] = convert_to_datetime(calendar['date'])
 calendar_tf = calendar.groupby('listing_id').agg(
     true_count=('available', lambda x: (x == 't').sum()),
     false_count=('available', lambda x: (x == 'f').sum())
-).reset_index()
+).reset_index() 
 
 print(calendar_tf)
 
 # aggregate calendar dataframe: group by listings_id, drop date, group by available, avg on minimum nights and maximum nights
-calendar_aggregated = calendar.groupby(['listing_id','available']).agg({'minimum_nights':'mean', 'maximum_nights' :'mean'})
+#calendar_aggregated = calendar.groupby(['listing_id','available']).agg({'minimum_nights':'mean', 'maximum_nights' :'mean'}).reset_index() 
+
+# aggregate calendar dataframe: group by listings_id, counts available days, avg on minimum nights and maximum nights
+calendar_aggregated = calendar.groupby(['listing_id']).agg(
+    total_available_count=('available', 'count'),
+    available_true_count=('available', lambda x: (x == 't').sum()),
+    minimum_nights=('minimum_nights', 'mean'),
+    maximum_nights=('maximum_nights', 'mean')
+).reset_index()
 
 print(calendar_aggregated)
 
@@ -110,11 +118,11 @@ reviews.drop_duplicates(inplace=True)
 reviews['date'] = convert_to_datetime(reviews['date'])
 reviews = reviews.drop(columns=['id', 'reviewer_id'])
 
-reviews_tf = reviews.groupby('listing_id').agg(
+reviews_aggregated = reviews.groupby('listing_id').agg(
     review_count=("comments", "count"),
     latest_review_date=("date", "max")).reset_index()
 
-print(reviews_tf)
+print(reviews_aggregated)
 
 # Neighbourhoods
 neighbourhoods = neighbourhoods.drop(columns=['neighbourhood_group'])
@@ -123,8 +131,8 @@ neighbourhoods = neighbourhoods.dissolve(
     as_index=False,
 )
 
-final_df = pd.merge(listings, calendar_tf, how='left', left_on='id', right_on='listing_id')
-final_df = pd.merge(final_df, reviews_tf, how='left', left_on='id', right_on='listing_id')
+final_df = pd.merge(listings, calendar_aggregated, how='left', left_on='id', right_on='listing_id')
+final_df = pd.merge(final_df, reviews_aggregated, how='left', left_on='id', right_on='listing_id')
 final_df = pd.merge(
     final_df,
     neighbourhoods,
@@ -133,6 +141,8 @@ final_df = pd.merge(
     right_on='neighbourhood',
     validate='many_to_one',
 )
+
+print(final_df)
 
 # =============================================================================
 # Data Validation
@@ -165,4 +175,4 @@ assert set(listings['license_status'].unique()) == {
     'unknown',
 }
 
-print(final_df)
+print(final_df.columns)
