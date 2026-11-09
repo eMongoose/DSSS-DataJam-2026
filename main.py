@@ -54,7 +54,6 @@ listings = listings.drop(columns=[
     'host_name', #irrelevant
     'calendar_updated', #nan
     'calendar_last_scraped', #irrelevant
-    'license', #nan
     'instant_bookable' #nan
     ])        
 
@@ -129,7 +128,11 @@ print(reviews_tf)
 
 assert pd.api.types.is_datetime64_any_dtype(reviews['date'])
 
-
 # Neighbourhoods
 neighbourhoods.drop_duplicates(inplace=True)
 neighbourhoods = neighbourhoods.drop(columns=['neighbourhood_group'])
+
+final_df = pd.merge(listings, calendar_tf, how='left', left_on='id', right_on='listing_id')
+final_df = pd.merge(final_df, reviews_tf, how='left', left_on='id', right_on='listing_id')
+final_df = pd.merge(final_df, neighbourhoods, how='left', left_on='neighbourhood_cleansed', right_on='neighbourhood')
+print(final_df)
