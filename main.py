@@ -56,6 +56,18 @@ listings = listings.drop(columns=[
 # Calendar
 calendar.drop_duplicates(inplace=True)
 
+# aggregate calendar dataframe: count num trues and num falses (idk why jeff wants this)
+calendar_tf = calendar.groupby('listing_id').agg(
+    true_count=('available', lambda x: (x == 't').sum()),
+    false_count=('available', lambda x: (x == 'f').sum())
+).reset_index()
+
+print(calendar_tf)
+
+# aggregate calendar dataframe: group by listings_id, drop date, group by available, avg on minimum nights and maximum nights
+calendar_aggregated = calendar.groupby(['listing_id','available']).agg({'minimum_nights':'mean', 'maximum_nights' :'mean'})
+
+print(calendar_aggregated)
 
 # Reviews
 reviews.drop_duplicates(inplace=True)
