@@ -11,6 +11,7 @@ from cleaning import (
     convert_tf_to_boolean,
     convert_to_datetime,
     derive_license_status,
+    categorize_properties,
 )
 
 # =============================================================================
@@ -22,6 +23,7 @@ reviews = pd.read_csv(
     'data/input/reviews.csv.gz',
     usecols=['listing_id', 'id', 'date'],
 )
+taxReport = pd.read_csv('data/input/property-tax-report.csv', sep=';', low_memory=False)
 neighbourhoods = gpd.read_file('data/input/neighbourhoods.geojson')
 
 REVIEW_CUTOFF = '2026-06-15'
@@ -199,5 +201,12 @@ assert set(listings['license_status'].unique()) == {
 
 print(final_df.columns)
 
+### ROI BRANCH
+
 final_df["property_category"] = final_df["property_type"].apply(categorize_properties)
 print(final_df["property_category"].value_counts())
+
+print(taxReport.head())
+print(taxReport.columns)
+
+print(taxReport["NEIGHBOURHOOD_CODE"].value_counts())
