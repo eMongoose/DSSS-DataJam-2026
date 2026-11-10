@@ -56,6 +56,60 @@ def convert_to_datetime(series):
     """Convert values to datetime; invalid values become NaT."""
     return pd.to_datetime(series, errors="coerce")
 
+
+def aggregate_trailing_review_counts(reviews, as_of_date):
+    """Aggregate privacy-safe review-event counts through an inclusive cutoff."""
+    required_columns = {"listing_id", "date"}
+    missing_columns = sorted(required_columns.difference(reviews.columns))
+    if missing_columns:
+        raise ValueError(
+            "reviews missing required columns: " + ", ".join(missing_columns)
+        )
+
+    cutoff = pd.to_datetime(as_of_date, errors="coerce")
+    if pd.isna(cutoff):
+        raise ValueError("review cutoff must be a valid date")
+    cutoff = cutoff.normalize()
+
+    review_events = reviews.loc[:, ["listing_id", "date"]].copy()
+    if review_events["listing_id"].isna().any():
+        raise ValueError("reviews contain missing listing IDs")
+
+    review_events["date"] = convert_to_datetime(review_events["date"])
+    if review_events["date"].isna().any():
+        raise ValueError("reviews contain invalid dates")
+    review_events["date"] = review_events["date"].dt.normalize()
+    review_events = review_events.loc[review_events["date"] <= cutoff]
+
+    output_columns = [
+        "listing_id",
+        "review_count",
+        "review_count_30d",
+        "review_count_90d",
+        "review_count_365d",
+        "latest_review_date",
+    ]
+    if review_events.empty:
+        return pd.DataFrame(columns=output_columns)
+
+    days_before_cutoff = (cutoff - review_events["date"]).dt.days
+    review_events["in_30d"] = days_before_cutoff < 30
+    review_events["in_90d"] = days_before_cutoff < 90
+    review_events["in_365d"] = days_before_cutoff < 365
+
+    aggregated = (
+        review_events.groupby("listing_id", as_index=False)
+        .agg(
+            review_count=("date", "size"),
+            review_count_30d=("in_30d", "sum"),
+            review_count_90d=("in_90d", "sum"),
+            review_count_365d=("in_365d", "sum"),
+            latest_review_date=("date", "max"),
+        )
+    )
+    return aggregated.loc[:, output_columns]
+
+
 def categorize_properties(property_type):
     pt = str(property_type).strip()
     if pt in [
@@ -82,4 +136,4 @@ def categorize_properties(property_type):
         "Tiny home","Camper/RV","Boat","Tower","Cave","Earthen home","Hut",
     ]:
         return "Niche / Unconventional Accommodations"
-    return "Other" 
+    return "Other"

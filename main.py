@@ -5,6 +5,7 @@ import pandas as pd
 import geopandas as gpd
 
 from cleaning import (
+    aggregate_trailing_review_counts,
     categorize_properties,
     clean_currency,
     convert_tf_to_boolean,
@@ -17,8 +18,13 @@ from cleaning import (
 
 listings = pd.read_csv('data/input/listings.csv.gz') 
 calendar = pd.read_csv('data/input/calendar.csv.gz')
-reviews = pd.read_csv('data/input/reviews.csv.gz')
+reviews = pd.read_csv(
+    'data/input/reviews.csv.gz',
+    usecols=['listing_id', 'id', 'date'],
+)
 neighbourhoods = gpd.read_file('data/input/neighbourhoods.geojson')
+
+REVIEW_CUTOFF = '2026-06-15'
 
 # =============================================================================
 # Cleaning Data
@@ -115,13 +121,20 @@ calendar_aggregated = calendar.groupby(['listing_id']).agg(
 print(calendar_aggregated)
 
 # Reviews
-reviews.drop_duplicates(inplace=True)
-reviews['date'] = convert_to_datetime(reviews['date'])
-reviews = reviews.drop(columns=['id', 'reviewer_id'])
+assert reviews['id'].notna().all()
+assert reviews['id'].is_unique
+reviews = reviews.drop(columns=['id'])
+reviews_aggregated = aggregate_trailing_review_counts(
+    reviews,
+    as_of_date=REVIEW_CUTOFF,
+)
 
-reviews_aggregated = reviews.groupby('listing_id').agg(
-    review_count=("comments", "count"),
-    latest_review_date=("date", "max")).reset_index()
+review_dates = convert_to_datetime(reviews['date'])
+eligible_review_count = review_dates.le(pd.Timestamp(REVIEW_CUTOFF)).sum()
+excluded_review_count = review_dates.gt(pd.Timestamp(REVIEW_CUTOFF)).sum()
+assert reviews_aggregated['review_count'].sum() == eligible_review_count
+print('Eligible review events:', eligible_review_count)
+print('Post-cutoff review events excluded:', excluded_review_count)
 
 print(reviews_aggregated)
 
@@ -133,7 +146,14 @@ neighbourhoods = neighbourhoods.dissolve(
 )
 
 final_df = pd.merge(listings, calendar_aggregated, how='left', left_on='id', right_on='listing_id')
-final_df = pd.merge(final_df, reviews_aggregated, how='left', left_on='id', right_on='listing_id')
+final_df = pd.merge(
+    final_df,
+    reviews_aggregated,
+    how='left',
+    left_on='id',
+    right_on='listing_id',
+    validate='one_to_one',
+)
 final_df = pd.merge(
     final_df,
     neighbourhoods,
@@ -164,7 +184,8 @@ assert all(
     for column in listing_date_columns
 )
 assert pd.api.types.is_datetime64_any_dtype(calendar['date'])
-assert pd.api.types.is_datetime64_any_dtype(reviews['date'])
+assert reviews_aggregated['listing_id'].is_unique
+assert reviews_aggregated['latest_review_date'].max() <= pd.Timestamp(REVIEW_CUTOFF)
 assert 'license' not in listings.columns
 assert 'license' not in final_df.columns
 assert listings['license_status'].notna().all()
