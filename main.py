@@ -11,6 +11,7 @@ from cleaning import (
     convert_tf_to_boolean,
     convert_to_datetime,
     derive_license_status,
+    prepare_listing_dataset,
 )
 
 # =============================================================================
@@ -201,3 +202,9 @@ print(final_df.columns)
 
 final_df["property_category"] = final_df["property_type"].apply(categorize_properties)
 print(final_df["property_category"].value_counts())
+
+# Keep only the explicit, privacy-safe columns approved for the cleaned dataset.
+prepared_dataset = prepare_listing_dataset(final_df)
+prepared_dataset.to_csv("data/output/listings_cleaned.csv.gz", index=False)
+print("Cleaned dataset rows:", len(prepared_dataset))
+print("Cleaned dataset columns:", prepared_dataset.columns.tolist())
