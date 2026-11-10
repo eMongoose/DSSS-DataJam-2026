@@ -56,7 +56,7 @@ def convert_to_datetime(series):
     """Convert values to datetime; invalid values become NaT."""
     return pd.to_datetime(series, errors="coerce")
 
- def categorize_properties(property_type):
+def categorize_properties(property_type):
     pt = str(property_type).strip()
     if pt in [
         "Entire rental unit", "Entire condo", "Entire loft", "Entire serviced apartment",

@@ -5,6 +5,7 @@ import pandas as pd
 import geopandas as gpd
 
 from cleaning import (
+    categorize_properties,
     clean_currency,
     convert_tf_to_boolean,
     convert_to_datetime,
@@ -177,5 +178,5 @@ assert set(listings['license_status'].unique()) == {
 
 print(final_df.columns)
 
- final_df["property_category"] = final_df["property_type"].apply(categorize_properties)
+final_df["property_category"] = final_df["property_type"].apply(categorize_properties)
 print(final_df["property_category"].value_counts())
