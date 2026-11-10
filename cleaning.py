@@ -55,3 +55,31 @@ def convert_tf_to_boolean(series):
 def convert_to_datetime(series):
     """Convert values to datetime; invalid values become NaT."""
     return pd.to_datetime(series, errors="coerce")
+
+ def categorize_properties(property_type):
+    pt = str(property_type).strip()
+    if pt in [
+        "Entire rental unit", "Entire condo", "Entire loft", "Entire serviced apartment",
+    ]:
+        return "Entire Apartment / Condos"
+    if pt in [
+        "Entire home", "Entire townhouse", "Entire villa", "Entire bungalow", "Entire cottage", "Entire vacation home", "Entire place",
+    ]:
+        return "Entire Houses / Townhouses"
+    if pt in [
+        "Entire guest suite", "Entire guesthouse",
+    ]:
+        return "Secondary Suites / Guest Units"
+    if pt.startswith("Private room"):
+        return "Private Rooms"
+    if pt.startswith("Shared room"):
+        return "Shared Rooms"
+    if pt in [
+        "Room in hotel", "Room in aparthotel", "Room in boutique hotel", "Entire bed and breakfast",
+    ]:
+        return "Commercial / Hospitality"
+    if pt in [
+        "Tiny home","Camper/RV","Boat","Tower","Cave","Earthen home","Hut",
+    ]:
+        return "Niche / Unconventional Accommodations"
+    return "Other" 

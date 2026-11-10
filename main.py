@@ -176,3 +176,6 @@ assert set(listings['license_status'].unique()) == {
 }
 
 print(final_df.columns)
+
+ final_df["property_category"] = final_df["property_type"].apply(categorize_properties)
+print(final_df["property_category"].value_counts())
