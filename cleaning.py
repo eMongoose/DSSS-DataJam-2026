@@ -57,9 +57,7 @@ def convert_to_datetime(series):
     return pd.to_datetime(series, errors="coerce")
 
 
-def aggregate_trailing_review_counts(
-    reviews, as_of_date, windows=(30, 90, 365)
-):
+def aggregate_trailing_review_counts(reviews, as_of_date):
     """Aggregate privacy-safe review-event counts through an inclusive cutoff."""
     required_columns = {"listing_id", "date"}
     missing_columns = sorted(required_columns.difference(reviews.columns))
@@ -72,18 +70,6 @@ def aggregate_trailing_review_counts(
     if pd.isna(cutoff):
         raise ValueError("review cutoff must be a valid date")
     cutoff = cutoff.normalize()
-
-    if (
-        not windows
-        or len(set(windows)) != len(windows)
-        or any(
-            isinstance(window, bool)
-            or not isinstance(window, int)
-            or window <= 0
-            for window in windows
-        )
-    ):
-        raise ValueError("review windows must be unique positive integers")
 
     review_events = reviews.loc[:, ["listing_id", "date"]].copy()
     if review_events["listing_id"].isna().any():
@@ -98,31 +84,29 @@ def aggregate_trailing_review_counts(
     output_columns = [
         "listing_id",
         "review_count",
-        *(f"review_count_{window}d" for window in windows),
+        "review_count_30d",
+        "review_count_90d",
+        "review_count_365d",
         "latest_review_date",
     ]
     if review_events.empty:
         return pd.DataFrame(columns=output_columns)
 
+    days_before_cutoff = (cutoff - review_events["date"]).dt.days
+    review_events["in_30d"] = days_before_cutoff < 30
+    review_events["in_90d"] = days_before_cutoff < 90
+    review_events["in_365d"] = days_before_cutoff < 365
+
     aggregated = (
         review_events.groupby("listing_id", as_index=False)
         .agg(
             review_count=("date", "size"),
+            review_count_30d=("in_30d", "sum"),
+            review_count_90d=("in_90d", "sum"),
+            review_count_365d=("in_365d", "sum"),
             latest_review_date=("date", "max"),
         )
     )
-
-    for window in windows:
-        window_start = cutoff - pd.Timedelta(days=window - 1)
-        window_counts = (
-            review_events.loc[review_events["date"] >= window_start]
-            .groupby("listing_id")
-            .size()
-        )
-        aggregated[f"review_count_{window}d"] = (
-            aggregated["listing_id"].map(window_counts).fillna(0).astype("int64")
-        )
-
     return aggregated.loc[:, output_columns]
 
 
