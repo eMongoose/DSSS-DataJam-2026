@@ -62,24 +62,31 @@ def categorize_properties(property_type):
         "Entire rental unit", "Entire condo", "Entire loft", "Entire serviced apartment",
     ]:
         return "Entire Apartment / Condos"
-    if pt in [
-        "Entire home", "Entire townhouse", "Entire villa", "Entire bungalow", "Entire cottage", "Entire vacation home", "Entire place",
+    elif pt in [
+        "Entire home", "Entire villa", "Entire bungalow", "Entire cottage", "Entire vacation home", "Entire place", "Entire house", "Entire residential home", "Tiny home", "Earthen home",
     ]:
-        return "Entire Houses / Townhouses"
-    if pt in [
+        return "Entire Houses"
+    elif pt in ["Entire townhouse", "Townhouse", "Entire residential townhouse"
+    ]:
+        return  "Entire Townhouses"
+
+    elif pt in [
         "Entire guest suite", "Entire guesthouse",
     ]:
         return "Secondary Suites / Guest Units"
-    if pt.startswith("Private room"):
+    elif pt.startswith("Private room"):
         return "Private Rooms"
-    if pt.startswith("Shared room"):
+    elif pt.startswith("Shared room"):
         return "Shared Rooms"
-    if pt in [
+    elif pt in [
         "Room in hotel", "Room in aparthotel", "Room in boutique hotel", "Entire bed and breakfast",
     ]:
         return "Commercial / Hospitality"
-    if pt in [
-        "Tiny home","Camper/RV","Boat","Tower","Cave","Earthen home","Hut",
+    elif pt in [
+        "Camper/RV","Boat","Tower","Cave","Hut",
     ]:
         return "Niche / Unconventional Accommodations"
-    return "Other" 
+    else:
+        return "Other" 
+
+    
