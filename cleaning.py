@@ -56,6 +56,76 @@ def convert_to_datetime(series):
     """Convert values to datetime; invalid values become NaT."""
     return pd.to_datetime(series, errors="coerce")
 
+
+def aggregate_trailing_review_counts(
+    reviews, as_of_date, windows=(30, 90, 365)
+):
+    """Aggregate privacy-safe review-event counts through an inclusive cutoff."""
+    required_columns = {"listing_id", "date"}
+    missing_columns = sorted(required_columns.difference(reviews.columns))
+    if missing_columns:
+        raise ValueError(
+            "reviews missing required columns: " + ", ".join(missing_columns)
+        )
+
+    cutoff = pd.to_datetime(as_of_date, errors="coerce")
+    if pd.isna(cutoff):
+        raise ValueError("review cutoff must be a valid date")
+    cutoff = cutoff.normalize()
+
+    if (
+        not windows
+        or len(set(windows)) != len(windows)
+        or any(
+            isinstance(window, bool)
+            or not isinstance(window, int)
+            or window <= 0
+            for window in windows
+        )
+    ):
+        raise ValueError("review windows must be unique positive integers")
+
+    review_events = reviews.loc[:, ["listing_id", "date"]].copy()
+    if review_events["listing_id"].isna().any():
+        raise ValueError("reviews contain missing listing IDs")
+
+    review_events["date"] = convert_to_datetime(review_events["date"])
+    if review_events["date"].isna().any():
+        raise ValueError("reviews contain invalid dates")
+    review_events["date"] = review_events["date"].dt.normalize()
+    review_events = review_events.loc[review_events["date"] <= cutoff]
+
+    output_columns = [
+        "listing_id",
+        "review_count",
+        *(f"review_count_{window}d" for window in windows),
+        "latest_review_date",
+    ]
+    if review_events.empty:
+        return pd.DataFrame(columns=output_columns)
+
+    aggregated = (
+        review_events.groupby("listing_id", as_index=False)
+        .agg(
+            review_count=("date", "size"),
+            latest_review_date=("date", "max"),
+        )
+    )
+
+    for window in windows:
+        window_start = cutoff - pd.Timedelta(days=window - 1)
+        window_counts = (
+            review_events.loc[review_events["date"] >= window_start]
+            .groupby("listing_id")
+            .size()
+        )
+        aggregated[f"review_count_{window}d"] = (
+            aggregated["listing_id"].map(window_counts).fillna(0).astype("int64")
+        )
+
+    return aggregated.loc[:, output_columns]
+
+
 def categorize_properties(property_type):
     pt = str(property_type).strip()
     if pt in [
@@ -82,4 +152,4 @@ def categorize_properties(property_type):
         "Tiny home","Camper/RV","Boat","Tower","Cave","Earthen home","Hut",
     ]:
         return "Niche / Unconventional Accommodations"
-    return "Other" 
+    return "Other"
