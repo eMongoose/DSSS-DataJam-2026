@@ -9,6 +9,7 @@ from cleaning import (
     convert_tf_to_boolean,
     convert_to_datetime,
     derive_license_status,
+    encode_property_category,
 )
 
 
@@ -88,6 +89,29 @@ class PropertyCategoryTests(unittest.TestCase):
                     categorize_properties(property_type),
                     expected_category,
                 )
+
+    def test_encodes_each_property_category_as_a_numeric_identifier(self):
+        expected_codes = {
+            "Entire Apartment / Condos": 0,
+            "Entire Houses / Townhouses": 1,
+            "Secondary Suites / Guest Units": 2,
+            "Private Rooms": 3,
+            "Shared Rooms": 4,
+            "Commercial / Hospitality": 5,
+            "Niche / Unconventional Accommodations": 6,
+            "Other": 7,
+        }
+
+        for category, expected_code in expected_codes.items():
+            with self.subTest(category=category):
+                self.assertEqual(
+                    encode_property_category(category),
+                    expected_code,
+                )
+
+    def test_rejects_unexpected_property_category(self):
+        with self.assertRaisesRegex(ValueError, "Unexpected property category"):
+            encode_property_category("Unknown category")
 
 
 class AggregateTrailingReviewCountsTests(unittest.TestCase):

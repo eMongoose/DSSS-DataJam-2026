@@ -1,6 +1,18 @@
 import pandas as pd
 
 
+PROPERTY_CATEGORY_CODES = {
+    "Entire Apartment / Condos": 0,
+    "Entire Houses / Townhouses": 1,
+    "Secondary Suites / Guest Units": 2,
+    "Private Rooms": 3,
+    "Shared Rooms": 4,
+    "Commercial / Hospitality": 5,
+    "Niche / Unconventional Accommodations": 6,
+    "Other": 7,
+}
+
+
 def clean_currency(series):
     """Convert currency-formatted values to numeric values."""
     return pd.to_numeric(
@@ -140,7 +152,15 @@ def categorize_properties(property_type):
         "Camper/RV","Boat","Tower","Cave","Hut",
     ]:
         return "Niche / Unconventional Accommodations"
-    else:
-        return "Other" 
+    return "Other"
 
     
+
+def encode_property_category(property_category):
+    """Return the non-ordinal numeric code for a property category."""
+    try:
+        return PROPERTY_CATEGORY_CODES[property_category]
+    except KeyError as exc:
+        raise ValueError(
+            f"Unexpected property category: {property_category!r}"
+        ) from exc

@@ -12,6 +12,7 @@ from cleaning import (
     convert_to_datetime,
     derive_license_status,
     categorize_properties,
+    encode_property_category,
 )
 
 # =============================================================================
@@ -210,3 +211,11 @@ print(taxReport.head())
 print(taxReport.columns)
 
 print(taxReport["NEIGHBOURHOOD_CODE"].value_counts())
+final_df["property_category_code"] = final_df["property_category"].apply(
+    encode_property_category
+)
+
+assert pd.api.types.is_numeric_dtype(final_df["property_category_code"])
+assert set(final_df["property_category_code"].unique()).issubset(set(range(8)))
+
+print(final_df["property_category_code"].value_counts().sort_index())
