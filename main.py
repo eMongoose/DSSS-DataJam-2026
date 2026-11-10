@@ -24,15 +24,12 @@ reviews = pd.read_csv(
 )
 neighbourhoods = gpd.read_file('data/input/neighbourhoods.geojson')
 
-REVIEW_CUTOFF = '2026-06-15'
-
 # =============================================================================
 # Cleaning Data
 # =============================================================================
-
 # Listings
 
-#listings.drop_duplicates(inplace=True)
+# listings.drop_duplicates(inplace=True)
 listings = listings.drop(columns=[
     'listing_url',#irrelevant
     'scrape_id', #irrelevant
@@ -95,7 +92,9 @@ for column in listing_date_columns:
 print('Price dtype:', listings['price'].dtype)
 print('Failed populated price conversions:', failed_price_conversion.sum())
 
+# =============================================================================
 # Calendar
+
 calendar.drop_duplicates(inplace=True)
 calendar['date'] = convert_to_datetime(calendar['date'])
 
@@ -108,62 +107,34 @@ calendar_tf = calendar.groupby('listing_id').agg(
 print(calendar_tf)
 
 # aggregate calendar dataframe: group by listings_id, drop date, group by available, avg on minimum nights and maximum nights
-#calendar_aggregated = calendar.groupby(['listing_id','available']).agg({'minimum_nights':'mean', 'maximum_nights' :'mean'}).reset_index() 
-
-# aggregate calendar dataframe: group by listings_id, counts available days, avg on minimum nights and maximum nights
-calendar_aggregated = calendar.groupby(['listing_id']).agg(
-    total_available_count=('available', 'count'),
-    available_true_count=('available', lambda x: (x == 't').sum()),
-    minimum_nights=('minimum_nights', 'mean'),
-    maximum_nights=('maximum_nights', 'mean')
-).reset_index()
+calendar_aggregated = calendar.groupby(['listing_id','available']).agg({'minimum_nights':'mean', 'maximum_nights' :'mean'})
 
 print(calendar_aggregated)
 
+# =============================================================================
 # Reviews
-assert reviews['id'].notna().all()
-assert reviews['id'].is_unique
-reviews = reviews.drop(columns=['id'])
-reviews_aggregated = aggregate_trailing_review_counts(
-    reviews,
-    as_of_date=REVIEW_CUTOFF,
-)
+reviews.drop_duplicates(inplace=True)
+reviews['date'] = convert_to_datetime(reviews['date'])
+reviews = reviews.drop(columns=['id', 'reviewer_id'])
 
-review_dates = convert_to_datetime(reviews['date'])
-eligible_review_count = review_dates.le(pd.Timestamp(REVIEW_CUTOFF)).sum()
-excluded_review_count = review_dates.gt(pd.Timestamp(REVIEW_CUTOFF)).sum()
-assert reviews_aggregated['review_count'].sum() == eligible_review_count
-print('Eligible review events:', eligible_review_count)
-print('Post-cutoff review events excluded:', excluded_review_count)
+reviews_tf = reviews.groupby('listing_id').agg(
+    review_count=("comments", "count"),
+    latest_review_date=("date", "max")).reset_index()
 
-print(reviews_aggregated)
+print(reviews_tf)
 
+# =============================================================================
 # Neighbourhoods
+neighbourhoods.drop_duplicates(inplace=True)
 neighbourhoods = neighbourhoods.drop(columns=['neighbourhood_group'])
 neighbourhoods = neighbourhoods.dissolve(
     by='neighbourhood',
     as_index=False,
 )
 
-final_df = pd.merge(listings, calendar_aggregated, how='left', left_on='id', right_on='listing_id')
-final_df = pd.merge(
-    final_df,
-    reviews_aggregated,
-    how='left',
-    left_on='id',
-    right_on='listing_id',
-    validate='one_to_one',
-)
-final_df = pd.merge(
-    final_df,
-    neighbourhoods,
-    how='left',
-    left_on='neighbourhood_cleansed',
-    right_on='neighbourhood',
-    validate='many_to_one',
-)
-
-print(final_df)
+final_df = pd.merge(listings, calendar_tf, how='left', left_on='id', right_on='listing_id')
+final_df = pd.merge(final_df, reviews_tf, how='left', left_on='id', right_on='listing_id')
+final_df = pd.merge(final_df, neighbourhoods, how='left', left_on='neighbourhood_cleansed', right_on='neighbourhood')
 
 # =============================================================================
 # Data Validation
@@ -197,7 +168,4 @@ assert set(listings['license_status'].unique()) == {
     'unknown',
 }
 
-print(final_df.columns)
-
-final_df["property_category"] = final_df["property_type"].apply(categorize_properties)
-print(final_df["property_category"].value_counts())
+print(final_df)
