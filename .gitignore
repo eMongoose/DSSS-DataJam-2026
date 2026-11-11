@@ -5,4 +5,9 @@ regions_map.html
 .env
 __pycache__/
 
+# Supplementary data output
+# src/supplementary_data/output/*
+
+
+
 !.gitkeep

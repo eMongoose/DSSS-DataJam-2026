@@ -36,4 +36,6 @@ housing_market_info = housing_market_info.rename(columns={
 # change % average's ++ entries into 0.
 # housing_market_info['avg_percent_change'] = housing_market_info['avg_percent_change'].replace('++', 0)
 
-print(housing_market_info)
+# print(housing_market_info)
+
+housing_market_info.to_csv('output/housing_market_info.csv')

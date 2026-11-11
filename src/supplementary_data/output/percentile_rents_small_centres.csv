@@ -1,4 +1,4 @@
-province,met_centre,rms_zone,studio_p30,studio_p50,studio_p65,studio_p80,one_bedroom_p30,one_bedroom_p50,one_bedroom_p65,one_bedroom_p80,two_bedroom_p30,two_bedroom_p50,two_bedroom_p65,two_bedroom_p80,three_plus_bedroom_p30,three_plus_bedroom_p50,three_plus_bedroom_p65,three_plus_bedroom_p80
+province,met_centre,rms_zone,studio_p30,studio_p50,studio_p65,studio_p80,1b_p30,1b_p50,1b_p65,1b_p80,2b_p30,2b_p50,2b_p65,2b_p80,3pb_p30,3pb_p50,3pb_p65,3pb_p80
 British Columbia,VANCOUVER,West End/Stanley Park,1444.0,1800.0,1950.0,2000.0,1603.0,1880.0,2000.0,2200.0,2511.0,2800.0,2917.0,3300.0,NaN,NaN,NaN,NaN
 British Columbia,VANCOUVER,English Bay,1455.0,1643.0,1850.0,2345.0,1700.0,1994.0,2050.0,2200.0,2451.0,3000.0,3200.0,3350.0,NaN,NaN,NaN,NaN
 British Columbia,VANCOUVER,Downtown,1625.0,1798.0,1921.0,2130.0,1882.0,2150.0,2300.0,2500.0,2800.0,3200.0,3525.0,3940.0,4740.0,4995.0,5650.0,5888.0

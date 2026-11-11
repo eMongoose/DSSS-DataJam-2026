@@ -111,9 +111,9 @@ bc_clean = bc[
 # Display data
 
 
-print(bc_clean.to_string(index=False, na_rep='NaN'))
+# print(bc_clean.to_string(index=False, na_rep='NaN'))
 
 # ======================================================================================
 # Export data
 
-bc_clean.to_csv('rental_universe.csv', index=False, na_rep='NaN')
+bc_clean.to_csv('output/num_units_by_building_size.csv', index=False, na_rep='NaN')

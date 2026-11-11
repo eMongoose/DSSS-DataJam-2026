@@ -87,8 +87,8 @@ bc = bc.dropna(subset=vacancy_cols, how='all')
 # Handle duplicates
 duplicates = bc[bc.duplicated(subset=['census_subdivision'], keep=False)].copy()
 
-print('\nDUPLICATE MUNICIPALITIES:')
-print(duplicates[['census_subdivision'] + vacancy_cols].to_string(index=False))
+# print('\nDUPLICATE MUNICIPALITIES:')
+# print(duplicates[['census_subdivision'] + vacancy_cols].to_string(index=False))
 
 # Keep duplicates separately for manual review
 # duplicates.to_csv('metro_vancouver_duplicates.csv', index=False)
@@ -109,10 +109,10 @@ ranking = (bc_clean.dropna(subset=['q4_vacancy']).sort_values('q4_vacancy').rese
 
 ranking['rank'] = ranking.index + 1
 
-print(ranking[['rank', 'census_subdivision'] + vacancy_cols].to_string(index=False))
+# print(ranking[['rank', 'census_subdivision'] + vacancy_cols].to_string(index=False))
 
 # ======================================================================================
 
 # Export data
 
-ranking.to_csv('vacancy_ranking.csv', index=False)
+ranking.to_csv('output/vacancy_ranking.csv', index=False)

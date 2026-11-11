@@ -1,0 +1,13 @@
+province,centre,census_subdivision,dwelling_type,bedroom_type,q1_vacancy,q1_reliability,q2_vacancy,q2_reliability,q3_vacancy,q3_reliability,q4_vacancy,q4_reliability,rank
+B.C.,Vancouver,Richmond (CY),Total,Total,0.2,b,0.1,b,0.0,c,0.3,b,1
+B.C.,Vancouver,Metro Vancouver A (RDA),Total,Total,0.8,a,0.0,c,0.3,a,0.3,a,2
+B.C.,Vancouver,Coquitlam (CY),Total,Total,0.1,b,0.2,b,0.8,d,0.5,b,3
+B.C.,Vancouver,Port Coquitlam (CY),Total,Total,0.0,d,0.0,d,0.0,d,0.6,b,4
+B.C.,Vancouver,Delta (CY),Total,Total,0.3,b,0.5,b,0.0,c,1.3,a,5
+B.C.,Vancouver,White Rock (CY),Total,Total,0.0,c,0.8,a,2.5,c,1.4,a,6
+B.C.,Vancouver,Vancouver (CY),Total,Total,0.6,a,0.5,a,0.6,a,1.5,a,7
+B.C.,Vancouver,West Vancouver (DM),Total,Total,0.2,b,0.2,b,0.6,a,1.5,a,8
+B.C.,Vancouver,New Westminster (CY),Total,Total,0.3,b,0.9,d,0.7,a,1.7,b,9
+B.C.,Vancouver,Burnaby (CY),Total,Total,1.1,d,0.4,a,1.0,a,2.3,a,10
+B.C.,Vancouver,Maple Ridge (CY),Total,Total,1.8,c,0.0,d,1.1,a,2.9,c,11
+B.C.,Vancouver,Surrey (CY),Total,Total,0.3,b,0.3,b,0.8,a,3.3,c,12

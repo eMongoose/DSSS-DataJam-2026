@@ -119,15 +119,13 @@ bc_clean = bc_clean.replace({pd.NA: np.nan})
 # ========================================================================================================================================
 # Display data
 
-print('\nMETRO VANCOUVER RENT DISTRIBUTION:')
-
-print(bc_clean.to_string(index=False, na_rep='NaN'))
+# print(bc_clean.to_string(index=False, na_rep='NaN'))
 
 # ========================================================================================================================================
 # Export data
 
 bc_clean.to_csv(
-    'rent_distribution.csv',
+    'output/rent_distribution.csv',
     index=False,
     na_rep='NaN'
 )

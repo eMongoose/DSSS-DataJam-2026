@@ -28,20 +28,20 @@ columns = [
     "studio_p65",
     "studio_p80",
 
-    "one_bedroom_p30",
-    "one_bedroom_p50",
-    "one_bedroom_p65",
-    "one_bedroom_p80",
+    "1b_p30",
+    "1b_p50",
+    "1b_p65",
+    "1b_p80",
 
-    "two_bedroom_p30",
-    "two_bedroom_p50",
-    "two_bedroom_p65",
-    "two_bedroom_p80",
+    "2b_p30",
+    "2b_p50",
+    "2b_p65",
+    "2b_p80",
 
-    "three_plus_bedroom_p30",
-    "three_plus_bedroom_p50",
-    "three_plus_bedroom_p65",
-    "three_plus_bedroom_p80"
+    "3pb_p30",
+    "3pb_p50",
+    "3pb_p65",
+    "3pb_p80"
 ]
 
 # ========================================================================================================================================
@@ -141,22 +141,21 @@ bc_clean = bc[
 # ========================================================================================================================================
 # Display data
 
-print("\nMETRO VANCOUVER 2025 RENT PERCENTILES:")
+# print("\nMETRO VANCOUVER 2025 RENT PERCENTILES:")
 
-print(
-    bc_clean.to_string(
-        index=False,
-        na_rep="NaN"
-    )
-)
+# print(
+#     bc_clean.to_string(
+#         index=False,
+#         na_rep="NaN"
+#     )
+# )
 
-print("\nTotal rows:", len(bc_clean))
 
 # ========================================================================================================================================
 # Export data
 
 bc_clean.to_csv(
-    "mv_rent_percentiles_2025.csv",
+    'output/percentile_rents_small_centres.csv',
     index=False,
     na_rep="NaN"
 )
