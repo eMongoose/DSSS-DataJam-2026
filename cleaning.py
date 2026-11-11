@@ -12,10 +12,12 @@ PROPERTY_CATEGORY_CODES = {
     "Other": 7,
 }
 
-# TODO: later when we get matrix numbers of property
+# Future scenario scaffold. Do not apply during the preprocessing phase.
 PROPERTY_NEIGHBOURHOOD_PERCENTAGES = {
-    # ("Downtown", 0): 0.08,
-    # ("Downtown", 1): 0.05,
+    # "Downtown": {
+    #     "Entire Apartment / Condos": 0.08,
+    #     "Entire Houses / Townhouses": 0.05,
+    # },
 }
 
 
@@ -120,16 +122,12 @@ def encode_property_category(property_category):
 
 def get_property_neighbourhood_percentage(
     neighbourhood,
-    property_category_code,
+    property_category,
     percentages=None,
 ):
     """Return the configured row-level percentage, or 0.0 when absent."""
-    if property_category_code not in set(PROPERTY_CATEGORY_CODES.values()):
-        raise ValueError(
-            f"Unexpected property category code: {property_category_code!r}"
-        )
-
     if percentages is None:
         percentages = PROPERTY_NEIGHBOURHOOD_PERCENTAGES
 
-    return float(percentages.get((neighbourhood, property_category_code), 0.0))
+    neighbourhood_percentages = percentages.get(neighbourhood, {})
+    return float(neighbourhood_percentages.get(property_category, 0.0))

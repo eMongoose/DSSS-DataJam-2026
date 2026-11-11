@@ -118,20 +118,26 @@ class PropertyCategoryTests(unittest.TestCase):
 class PropertyNeighbourhoodPercentageTests(unittest.TestCase):
     def setUp(self):
         self.percentages = {
-            ("Downtown", 0): 0.08,
-            ("Downtown", 1): 0.05,
+            "Downtown": {
+                "Entire Apartment / Condos": 0.08,
+                "Entire Houses / Townhouses": 0.05,
+            },
         }
 
     def test_returns_percentage_for_exact_combination(self):
         self.assertEqual(
             get_property_neighbourhood_percentage(
-                "Downtown", 0, self.percentages
+                "Downtown",
+                "Entire Apartment / Condos",
+                self.percentages,
             ),
             0.08,
         )
         self.assertEqual(
             get_property_neighbourhood_percentage(
-                "Downtown", 1, self.percentages
+                "Downtown",
+                "Entire Houses / Townhouses",
+                self.percentages,
             ),
             0.05,
         )
@@ -139,22 +145,21 @@ class PropertyNeighbourhoodPercentageTests(unittest.TestCase):
     def test_missing_combination_defaults_to_zero(self):
         self.assertEqual(
             get_property_neighbourhood_percentage(
-                "Kitsilano", 0, self.percentages
+                "Kitsilano",
+                "Entire Apartment / Condos",
+                self.percentages,
             ),
             0.0,
         )
         self.assertEqual(
             get_property_neighbourhood_percentage(
-                "Downtown", 2, self.percentages
+                "Downtown",
+                "Secondary Suites / Guest Units",
+                self.percentages,
             ),
             0.0,
         )
 
-    def test_rejects_unknown_category_code(self):
-        with self.assertRaisesRegex(ValueError, "category code"):
-            get_property_neighbourhood_percentage(
-                "Downtown", 99, self.percentages
-            )
 
 class AggregateTrailingReviewCountsTests(unittest.TestCase):
     def test_counts_inclusive_windows_and_excludes_future_reviews(self):
