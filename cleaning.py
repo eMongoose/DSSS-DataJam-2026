@@ -12,6 +12,12 @@ PROPERTY_CATEGORY_CODES = {
     "Other": 7,
 }
 
+# TODO: later when we get matrix numbers of property
+PROPERTY_NEIGHBOURHOOD_PERCENTAGES = {
+    # ("Downtown", 0): 0.08,
+    # ("Downtown", 1): 0.05,
+}
+
 
 def clean_currency(series):
     """Convert currency-formatted values to numeric values."""
@@ -129,13 +135,12 @@ def categorize_properties(property_type):
     ]:
         return "Entire Apartment / Condos"
     elif pt in [
-        "Entire home", "Entire villa", "Entire bungalow", "Entire cottage", "Entire vacation home", "Entire place", "Entire house", "Entire residential home", "Tiny home", "Earthen home",
+        "Entire home", "Entire villa", "Entire bungalow", "Entire cottage",
+        "Entire vacation home", "Entire place", "Entire house",
+        "Entire residential home", "Entire townhouse", "Townhouse",
+        "Entire residential townhouse",
     ]:
-        return "Entire Houses"
-    elif pt in ["Entire townhouse", "Townhouse", "Entire residential townhouse"
-    ]:
-        return  "Entire Townhouses"
-
+        return "Entire Houses / Townhouses"
     elif pt in [
         "Entire guest suite", "Entire guesthouse",
     ]:
@@ -149,7 +154,8 @@ def categorize_properties(property_type):
     ]:
         return "Commercial / Hospitality"
     elif pt in [
-        "Camper/RV","Boat","Tower","Cave","Hut",
+        "Tiny home", "Earthen home", "Camper/RV", "Boat", "Tower", "Cave",
+        "Hut",
     ]:
         return "Niche / Unconventional Accommodations"
     return "Other"
@@ -164,3 +170,20 @@ def encode_property_category(property_category):
         raise ValueError(
             f"Unexpected property category: {property_category!r}"
         ) from exc
+
+
+def get_property_neighbourhood_percentage(
+    neighbourhood,
+    property_category_code,
+    percentages=None,
+):
+    """Return the configured row-level percentage, or 0.0 when absent."""
+    if property_category_code not in set(PROPERTY_CATEGORY_CODES.values()):
+        raise ValueError(
+            f"Unexpected property category code: {property_category_code!r}"
+        )
+
+    if percentages is None:
+        percentages = PROPERTY_NEIGHBOURHOOD_PERCENTAGES
+
+    return float(percentages.get((neighbourhood, property_category_code), 0.0))
