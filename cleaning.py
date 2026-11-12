@@ -1,8 +1,11 @@
+from dataclasses import dataclass
+from enum import Enum
+
 import pandas as pd
 
 
 PROPERTY_CATEGORY_CODES = {
-    "Entire Apartment / Condos": 0,
+    "Entire Apartments / Condos": 0,
     "Entire Houses": 1,
     "Entire Townhouses": 2,
     "Secondary Suites / Guest Units": 3,
@@ -11,10 +14,61 @@ PROPERTY_CATEGORY_CODES = {
     "Other": 6,
 }
 
+
+class PropertyCategory(str, Enum):
+    ENTIRE_APARTMENTS_CONDOS     = "Entire Apartments / Condos"
+    ENTIRE_HOUSES                = "Entire Houses"
+    ENTIRE_TOWNHOUSES            = "Entire Townhouses"
+    SECONDARY_SUITES_GUEST_UNITS = "Secondary Suites / Guest Units"
+    PRIVATE_ROOMS                = "Private Rooms"
+    COMMERCIAL_HOSPITALITY       = "Commercial / Hospitality"
+    
+# Source: user-supplied market research, November 2026.
+MARKET_PURCHASE_PRICE: dict[str, float] = {
+    PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value:        708_250.0,
+    PropertyCategory.ENTIRE_HOUSES.value:                   2_350_750.0,
+    PropertyCategory.ENTIRE_TOWNHOUSES.value:               1_203_250.0,
+    PropertyCategory.SECONDARY_SUITES_GUEST_UNITS.value:    627_871.0,
+    PropertyCategory.PRIVATE_ROOMS.value:                   225_156.0,
+    PropertyCategory.COMMERCIAL_HOSPITALITY.value:          762_040.0,
+}
+
+@dataclass(frozen=True)
+class NeighbourhoodComposite:
+    multiplier: float
+    price_cad: int
+
+COMPOSITE_BASELINE = NeighbourhoodComposite(multiplier=1.00, price_cad=1_099_100)
+
+NEIGHBOURHOOD_COMPOSITE: dict[str, NeighbourhoodComposite] = {
+    "Shaughnessy":              NeighbourhoodComposite(3.58, 3_930_000),
+    "Arbutus Ridge":            NeighbourhoodComposite(2.78, 3_050_000),
+    "Dunbar-Southlands":        NeighbourhoodComposite(2.40, 2_640_000),
+    "West Point Grey":          NeighbourhoodComposite(2.06, 2_260_000),
+    "Victoria-Fraserview":      NeighbourhoodComposite(1.82, 2_000_000),
+    "Kerrisdale":               NeighbourhoodComposite(1.78, 1_960_000),
+    "Riley Park":               NeighbourhoodComposite(1.44, 1_580_000),
+    "Killarney":                NeighbourhoodComposite(1.37, 1_510_000),
+    "Sunset":                   NeighbourhoodComposite(1.35, 1_480_000),
+    "Oakridge":                 NeighbourhoodComposite(1.30, 1_430_000),
+    "South Cambie":             NeighbourhoodComposite(1.28, 1_410_000),
+    "Kensington-Cedar Cottage": NeighbourhoodComposite(1.28, 1_410_000),
+    "Hastings-Sunrise":         NeighbourhoodComposite(1.23, 1_350_000),
+    "Grandview-Woodland":       NeighbourhoodComposite(1.19, 1_310_000),
+    "Kitsilano":                NeighbourhoodComposite(1.18, 1_300_000),
+    "Marpole":                  NeighbourhoodComposite(0.98, 1_080_000),
+    "Fairview":                 NeighbourhoodComposite(0.81,   893_000),
+    "Renfrew-Collingwood":      NeighbourhoodComposite(0.76,   834_000),
+    "Mount Pleasant":           NeighbourhoodComposite(0.74,   808_000),
+    "Strathcona":               NeighbourhoodComposite(0.72,   795_000),
+    "Downtown":                 NeighbourhoodComposite(0.56,   613_000),
+    "West End":                 NeighbourhoodComposite(0.55,   610_000),
+}
+
 # Future scenario scaffold. Do not apply during the preprocessing phase.
 PROPERTY_NEIGHBOURHOOD_PERCENTAGES = {
     # "Downtown": {
-    #     "Entire Apartment / Condos": 0.08,
+    #     "Entire Apartments / Condos": 0.08,
     #     "Entire Houses": 0.05,
     # },
 }
@@ -134,7 +188,7 @@ def categorize_properties(property_type):
     if pt in [
         "Entire rental unit", "Entire condo", "Entire loft", "Entire serviced apartment",
     ]:
-        return "Entire Apartment / Condos"
+        return "Entire Apartments / Condos"
     elif pt in [
         "Entire home", "Entire villa", "Entire bungalow", "Entire cottage",
         "Entire vacation home", "Entire place", "Entire house",

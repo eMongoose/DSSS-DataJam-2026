@@ -74,7 +74,7 @@ class LicenseStatusTests(unittest.TestCase):
 class PropertyCategoryTests(unittest.TestCase):
     def test_supported_property_categories_and_fallback(self):
         examples = {
-            "Entire condo": "Entire Apartment / Condos",
+            "Entire condo": "Entire Apartments / Condos",
             "Entire home": "Entire Houses",
             "Entire townhouse": "Entire Townhouses",
             "Entire guesthouse": "Secondary Suites / Guest Units",
@@ -94,7 +94,7 @@ class PropertyCategoryTests(unittest.TestCase):
 
     def test_encodes_each_property_category_as_a_numeric_identifier(self):
         expected_codes = {
-            "Entire Apartment / Condos": 0,
+            "Entire Apartments / Condos": 0,
             "Entire Houses": 1,
             "Entire Townhouses": 2,
             "Secondary Suites / Guest Units": 3,
@@ -118,7 +118,7 @@ class PropertyNeighbourhoodPercentageTests(unittest.TestCase):
     def setUp(self):
         self.percentages = {
             "Downtown": {
-                "Entire Apartment / Condos": 0.08,
+                "Entire Apartments / Condos": 0.08,
                 "Entire Houses": 0.05,
                 "Entire Townhouses": 0.04,
             },
@@ -128,7 +128,7 @@ class PropertyNeighbourhoodPercentageTests(unittest.TestCase):
         self.assertEqual(
             get_property_neighbourhood_percentage(
                 "Downtown",
-                "Entire Apartment / Condos",
+                "Entire Apartments / Condos",
                 self.percentages,
             ),
             0.08,
@@ -154,7 +154,7 @@ class PropertyNeighbourhoodPercentageTests(unittest.TestCase):
         self.assertEqual(
             get_property_neighbourhood_percentage(
                 "Kitsilano",
-                "Entire Apartment / Condos",
+                "Entire Apartments / Condos",
                 self.percentages,
             ),
             0.0,
