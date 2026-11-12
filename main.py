@@ -7,10 +7,13 @@ import geopandas as gpd
 from cleaning import (
     aggregate_trailing_review_counts,
     categorize_properties,
+    PROPERTY_NEIGHBOURHOOD_PERCENTAGES,
     clean_currency,
     convert_tf_to_boolean,
     convert_to_datetime,
     derive_license_status,
+    categorize_properties,
+    encode_property_category,
 )
 
 # =============================================================================
@@ -197,7 +200,26 @@ assert set(listings['license_status'].unique()) == {
     'unknown',
 }
 
+# Additional ROI testing 
+
 print(final_df.columns)
 
 final_df["property_category"] = final_df["property_type"].apply(categorize_properties)
 print(final_df["property_category"].value_counts())
+
+other_counts = (
+    final_df.loc[final_df["property_category"] == "Other", "property_type"]
+    .value_counts()
+    .sort_values(ascending=False)
+)
+print("Property types in Other:")
+print(other_counts.to_string())
+
+final_df["property_category_code"] = final_df["property_category"].apply(
+    encode_property_category
+)
+
+assert pd.api.types.is_numeric_dtype(final_df["property_category_code"])
+assert set(final_df["property_category_code"].unique()).issubset(set(range(7)))
+
+print(final_df["property_category_code"].value_counts().sort_index())

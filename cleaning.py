@@ -1,5 +1,150 @@
+from enum import Enum
+
 import pandas as pd
 
+
+PROPERTY_CATEGORY_CODES = {
+    "Entire Apartments / Condos": 0,
+    "Entire Houses": 1,
+    "Entire Townhouses": 2,
+    "Secondary Suites / Guest Units": 3,
+    "Private Rooms": 4,
+    "Commercial / Hospitality": 5,
+    "Other": 6,
+}
+
+
+class PropertyCategory(str, Enum):
+    ENTIRE_APARTMENTS_CONDOS     = "Entire Apartments / Condos"
+    ENTIRE_HOUSES                = "Entire Houses"
+    ENTIRE_TOWNHOUSES            = "Entire Townhouses"
+    SECONDARY_SUITES_GUEST_UNITS = "Secondary Suites / Guest Units"
+    PRIVATE_ROOMS                = "Private Rooms"
+    COMMERCIAL_HOSPITALITY       = "Commercial / Hospitality"
+    
+# Source: user-supplied market research, November 2026.
+NEIGHBOURHOOD_PURCHASE_PRICE_CAD: dict[str, dict[str, int]] = {
+    "Arbutus Ridge": {
+        PropertyCategory.ENTIRE_HOUSES.value: 3_110_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_654_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 1_028_000,
+    },
+    "Cambie Corridor": {
+        PropertyCategory.ENTIRE_HOUSES.value: 2_620_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_600_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 1_020_000,
+    },
+    "Downtown": {
+        PropertyCategory.ENTIRE_HOUSES.value: 1_930_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_080_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 605_000,
+    },
+    "Dunbar-Southlands": {
+        PropertyCategory.ENTIRE_HOUSES.value: 2_860_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_553_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 965_000,
+    },
+    "Fairview": {
+        PropertyCategory.ENTIRE_HOUSES.value: 2_249_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_110_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 797_000,
+    },
+    "Grandview-Woodland": {
+        PropertyCategory.ENTIRE_HOUSES.value: 1_640_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_220_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 589_000,
+    },
+    "Hastings-Sunrise": {
+        PropertyCategory.ENTIRE_HOUSES.value: 1_560_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 820_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 493_000,
+    },
+    "Kensington-Cedar Cottage": {
+        PropertyCategory.ENTIRE_HOUSES.value: 1_580_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_250_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 659_000,
+    },
+    "Kerrisdale": {
+        PropertyCategory.ENTIRE_HOUSES.value: 2_960_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_520_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 979_000,
+    },
+    "Killarney": {
+        PropertyCategory.ENTIRE_HOUSES.value: 1_690_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 826_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 526_000,
+    },
+    "Kitsilano": {
+        PropertyCategory.ENTIRE_HOUSES.value: 2_610_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_180_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 714_000,
+    },
+    "Marpole": {
+        PropertyCategory.ENTIRE_HOUSES.value: 1_890_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_440_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 683_000,
+    },
+    "Mount Pleasant": {
+        PropertyCategory.ENTIRE_HOUSES.value: 1_670_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_060_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 648_000,
+    },
+    "Oakridge": {
+        PropertyCategory.ENTIRE_HOUSES.value: 3_410_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_500_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 993_000,
+    },
+    "Renfrew-Collingwood": {
+        PropertyCategory.ENTIRE_HOUSES.value: 1_490_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 856_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 501_000,
+    },
+    "Riley Park": {
+        PropertyCategory.ENTIRE_HOUSES.value: 1_990_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_090_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 948_000,
+    },
+    "Shaughnessy": {
+        PropertyCategory.ENTIRE_HOUSES.value: 4_820_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_680_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 991_000,
+    },
+    "South Cambie": {
+        PropertyCategory.ENTIRE_HOUSES.value: 4_050_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_410_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 1_030_000,
+    },
+    "Strathcona": {
+        PropertyCategory.ENTIRE_HOUSES.value: 1_470_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 900_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 644_000,
+    },
+    "Sunset": {
+        PropertyCategory.ENTIRE_HOUSES.value: 1_580_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 855_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 530_000,
+    },
+    "UBC": {
+        PropertyCategory.ENTIRE_HOUSES.value: 2_120_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_560_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 996_000,
+    },
+    "Victoria-Fraserview": {
+        PropertyCategory.ENTIRE_HOUSES.value: 1_990_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_058_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 658_000,
+    },
+    "West End": {
+        PropertyCategory.ENTIRE_HOUSES.value: 1_971_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_130_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 601_000,
+    },
+    "West Point Grey": {
+        PropertyCategory.ENTIRE_HOUSES.value: 2_690_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_240_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 736_000,
+    },
+}
 
 def clean_currency(series):
     """Convert currency-formatted values to numeric values."""
@@ -115,29 +260,49 @@ def categorize_properties(property_type):
     if pt in [
         "Entire rental unit", "Entire condo", "Entire loft", "Entire serviced apartment",
     ]:
-        return "Entire Apartment / Condos"
-    if pt in [
-        "Entire home", "Entire villa", "Entire bungalow", "Entire cottage", "Entire vacation home", "Entire place",
+        return "Entire Apartments / Condos"
+    elif pt in [
+        "Entire home", "Entire villa", "Entire bungalow", "Entire cottage",
+        "Entire vacation home", "Entire place", "Entire house",
+        "Entire residential home",
     ]:
         return "Entire Houses"
-    if pt in [
-        "Entire townhouse", 
+    elif pt in [
+        "Entire townhouse", "Townhouse", "Entire residential townhouse",
     ]:
         return "Entire Townhouses"
-    if pt in [
+    elif pt in [
         "Entire guest suite", "Entire guesthouse",
     ]:
         return "Secondary Suites / Guest Units"
-    if pt.startswith("Private room"):
+    elif pt.startswith("Private room"):
         return "Private Rooms"
-    if pt.startswith("Shared room"):
-        return "Shared Rooms"
-    if pt in [
-        "Room in hotel", "Room in aparthotel", "Room in boutique hotel", "Entire bed and breakfast",
+    elif pt in [
+        "Room in hotel", "Room in aparthotel", "Room in boutique hotel", "Entire bed and breakfast", "Room in bed and breakfast",
     ]:
         return "Commercial / Hospitality"
-    if pt in [
-        "Tiny home","Camper/RV","Boat","Tower","Cave","Earthen home","Hut",
-    ]:
-        return "Niche / Unconventional Accommodations"
     return "Other"
+
+    
+
+def encode_property_category(property_category):
+    """Return the non-ordinal numeric code for a property category."""
+    try:
+        return PROPERTY_CATEGORY_CODES[property_category]
+    except KeyError as exc:
+        raise ValueError(
+            f"Unexpected property category: {property_category!r}"
+        ) from exc
+
+
+def get_property_neighbourhood_percentage(
+    neighbourhood,
+    property_category,
+    percentages=None,
+):
+    """Return the configured row-level percentage, or 0.0 when absent."""
+    if percentages is None:
+        percentages = PROPERTY_NEIGHBOURHOOD_PERCENTAGES
+
+    neighbourhood_percentages = percentages.get(neighbourhood, {})
+    return float(neighbourhood_percentages.get(property_category, 0.0))
