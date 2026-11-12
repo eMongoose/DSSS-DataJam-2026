@@ -25,7 +25,6 @@ reviews = pd.read_csv(
     'data/input/reviews.csv.gz',
     usecols=['listing_id', 'id', 'date'],
 )
-taxReport = pd.read_csv('data/input/property-tax-report.csv', sep=';', low_memory=False)
 neighbourhoods = gpd.read_file('data/input/neighbourhoods.geojson')
 
 REVIEW_CUTOFF = '2026-06-15'
@@ -208,15 +207,19 @@ print(final_df.columns)
 final_df["property_category"] = final_df["property_type"].apply(categorize_properties)
 print(final_df["property_category"].value_counts())
 
-print(taxReport.head())
-print(taxReport.columns)
+other_counts = (
+    final_df.loc[final_df["property_category"] == "Other", "property_type"]
+    .value_counts()
+    .sort_values(ascending=False)
+)
+print("Property types in Other:")
+print(other_counts.to_string())
 
-print(taxReport["NEIGHBOURHOOD_CODE"].value_counts())
 final_df["property_category_code"] = final_df["property_category"].apply(
     encode_property_category
 )
 
 assert pd.api.types.is_numeric_dtype(final_df["property_category_code"])
-assert set(final_df["property_category_code"].unique()).issubset(set(range(8)))
+assert set(final_df["property_category_code"].unique()).issubset(set(range(7)))
 
 print(final_df["property_category_code"].value_counts().sort_index())

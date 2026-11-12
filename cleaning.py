@@ -3,20 +3,19 @@ import pandas as pd
 
 PROPERTY_CATEGORY_CODES = {
     "Entire Apartment / Condos": 0,
-    "Entire Houses / Townhouses": 1,
-    "Secondary Suites / Guest Units": 2,
-    "Private Rooms": 3,
-    "Shared Rooms": 4,
+    "Entire Houses": 1,
+    "Entire Townhouses": 2,
+    "Secondary Suites / Guest Units": 3,
+    "Private Rooms": 4,
     "Commercial / Hospitality": 5,
-    "Niche / Unconventional Accommodations": 6,
-    "Other": 7,
+    "Other": 6,
 }
 
 # Future scenario scaffold. Do not apply during the preprocessing phase.
 PROPERTY_NEIGHBOURHOOD_PERCENTAGES = {
     # "Downtown": {
     #     "Entire Apartment / Condos": 0.08,
-    #     "Entire Houses / Townhouses": 0.05,
+    #     "Entire Houses": 0.05,
     # },
 }
 
@@ -139,27 +138,23 @@ def categorize_properties(property_type):
     elif pt in [
         "Entire home", "Entire villa", "Entire bungalow", "Entire cottage",
         "Entire vacation home", "Entire place", "Entire house",
-        "Entire residential home", "Entire townhouse", "Townhouse",
-        "Entire residential townhouse",
+        "Entire residential home",
     ]:
-        return "Entire Houses / Townhouses"
+        return "Entire Houses"
+    elif pt in [
+        "Entire townhouse", "Townhouse", "Entire residential townhouse",
+    ]:
+        return "Entire Townhouses"
     elif pt in [
         "Entire guest suite", "Entire guesthouse",
     ]:
         return "Secondary Suites / Guest Units"
     elif pt.startswith("Private room"):
         return "Private Rooms"
-    elif pt.startswith("Shared room"):
-        return "Shared Rooms"
     elif pt in [
-        "Room in hotel", "Room in aparthotel", "Room in boutique hotel", "Entire bed and breakfast",
+        "Room in hotel", "Room in aparthotel", "Room in boutique hotel", "Entire bed and breakfast", "Room in bed and breakfast",
     ]:
         return "Commercial / Hospitality"
-    elif pt in [
-        "Tiny home", "Earthen home", "Camper/RV", "Boat", "Tower", "Cave",
-        "Hut",
-    ]:
-        return "Niche / Unconventional Accommodations"
     return "Other"
 
     

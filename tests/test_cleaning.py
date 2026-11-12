@@ -72,15 +72,16 @@ class LicenseStatusTests(unittest.TestCase):
 
 
 class PropertyCategoryTests(unittest.TestCase):
-    def test_each_property_category_and_fallback(self):
+    def test_supported_property_categories_and_fallback(self):
         examples = {
             "Entire condo": "Entire Apartment / Condos",
-            "Entire townhouse": "Entire Houses / Townhouses",
+            "Entire home": "Entire Houses",
+            "Entire townhouse": "Entire Townhouses",
             "Entire guesthouse": "Secondary Suites / Guest Units",
             "Private room in condo": "Private Rooms",
-            "Shared room in home": "Shared Rooms",
             "Room in hotel": "Commercial / Hospitality",
-            "Tiny home": "Niche / Unconventional Accommodations",
+            "Shared room in home": "Other",
+            "Tiny home": "Other",
             "Castle": "Other",
         }
 
@@ -94,13 +95,11 @@ class PropertyCategoryTests(unittest.TestCase):
     def test_encodes_each_property_category_as_a_numeric_identifier(self):
         expected_codes = {
             "Entire Apartment / Condos": 0,
-            "Entire Houses / Townhouses": 1,
-            "Secondary Suites / Guest Units": 2,
-            "Private Rooms": 3,
-            "Shared Rooms": 4,
+            "Entire Houses": 1,
+            "Entire Townhouses": 2,
+            "Secondary Suites / Guest Units": 3,
+            "Private Rooms": 4,
             "Commercial / Hospitality": 5,
-            "Niche / Unconventional Accommodations": 6,
-            "Other": 7,
         }
 
         for category, expected_code in expected_codes.items():
@@ -120,7 +119,8 @@ class PropertyNeighbourhoodPercentageTests(unittest.TestCase):
         self.percentages = {
             "Downtown": {
                 "Entire Apartment / Condos": 0.08,
-                "Entire Houses / Townhouses": 0.05,
+                "Entire Houses": 0.05,
+                "Entire Townhouses": 0.04,
             },
         }
 
@@ -136,10 +136,18 @@ class PropertyNeighbourhoodPercentageTests(unittest.TestCase):
         self.assertEqual(
             get_property_neighbourhood_percentage(
                 "Downtown",
-                "Entire Houses / Townhouses",
+                "Entire Houses",
                 self.percentages,
             ),
             0.05,
+        )
+        self.assertEqual(
+            get_property_neighbourhood_percentage(
+                "Downtown",
+                "Entire Townhouses",
+                self.percentages,
+            ),
+            0.04,
         )
 
     def test_missing_combination_defaults_to_zero(self):
