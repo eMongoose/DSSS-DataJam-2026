@@ -200,9 +200,9 @@ assert set(listings['license_status'].unique()) == {
     'unknown',
 }
 
-print(final_df.columns)
+# Additional ROI testing 
 
-### ROI BRANCH
+print(final_df.columns)
 
 final_df["property_category"] = final_df["property_type"].apply(categorize_properties)
 print(final_df["property_category"].value_counts())
