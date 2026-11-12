@@ -146,15 +146,6 @@ NEIGHBOURHOOD_PURCHASE_PRICE_CAD: dict[str, dict[str, int]] = {
     },
 }
 
-# Future scenario scaffold. Do not apply during the preprocessing phase.
-PROPERTY_NEIGHBOURHOOD_PERCENTAGES = {
-    # "Downtown": {
-    #     "Entire Apartments / Condos": 0.08,
-    #     "Entire Houses": 0.05,
-    # },
-}
-
-
 def clean_currency(series):
     """Convert currency-formatted values to numeric values."""
     return pd.to_numeric(
