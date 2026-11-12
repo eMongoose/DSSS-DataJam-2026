@@ -117,9 +117,13 @@ def categorize_properties(property_type):
     ]:
         return "Entire Apartment / Condos"
     if pt in [
-        "Entire home", "Entire townhouse", "Entire villa", "Entire bungalow", "Entire cottage", "Entire vacation home", "Entire place",
+        "Entire home", "Entire villa", "Entire bungalow", "Entire cottage", "Entire vacation home", "Entire place",
     ]:
-        return "Entire Houses / Townhouses"
+        return "Entire Houses"
+    if pt in [
+        "Entire townhouse", 
+    ]:
+        return "Entire Townhouses"
     if pt in [
         "Entire guest suite", "Entire guesthouse",
     ]:
