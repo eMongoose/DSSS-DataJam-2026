@@ -1,4 +1,3 @@
-from dataclasses import dataclass
 from enum import Enum
 
 import pandas as pd
@@ -24,48 +23,127 @@ class PropertyCategory(str, Enum):
     COMMERCIAL_HOSPITALITY       = "Commercial / Hospitality"
     
 # Source: user-supplied market research, November 2026.
-MARKET_PURCHASE_PRICE: dict[str, float] = {
-    PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value:        708_250.0,
-    PropertyCategory.ENTIRE_HOUSES.value:                   2_350_750.0,
-    PropertyCategory.ENTIRE_TOWNHOUSES.value:               1_203_250.0,
-    PropertyCategory.SECONDARY_SUITES_GUEST_UNITS.value:    627_871.0,
-    PropertyCategory.PRIVATE_ROOMS.value:                   225_156.0,
-    PropertyCategory.COMMERCIAL_HOSPITALITY.value:          762_040.0,
-}
-
-@dataclass(frozen=True)
-class NeighbourhoodComposite:
-    multiplier: float
-    price_cad: int
-
-COMPOSITE_BASELINE = NeighbourhoodComposite(multiplier=1.00, price_cad=1_099_100)
-
-NEIGHBOURHOOD_COMPOSITE: dict[str, NeighbourhoodComposite] = {
-    "Shaughnessy":              NeighbourhoodComposite(3.58, 3_930_000),
-    "Arbutus Ridge":            NeighbourhoodComposite(2.78, 3_050_000),
-    "Dunbar Southlands":        NeighbourhoodComposite(2.40, 2_640_000),
-    "West Point Grey":          NeighbourhoodComposite(2.06, 2_260_000),
-    "Victoria-Fraserview":      NeighbourhoodComposite(1.82, 2_000_000),
-    "Kerrisdale":               NeighbourhoodComposite(1.78, 1_960_000),
-    "Riley Park":               NeighbourhoodComposite(1.44, 1_580_000),
-    "Killarney":                NeighbourhoodComposite(1.37, 1_510_000),
-    "Sunset":                   NeighbourhoodComposite(1.35, 1_480_000),
-    "Oakridge":                 NeighbourhoodComposite(1.30, 1_430_000),
-    "South Cambie":             NeighbourhoodComposite(1.28, 1_410_000),
-    "Kensington-Cedar Cottage": NeighbourhoodComposite(1.28, 1_410_000),
-    "Hastings-Sunrise":         NeighbourhoodComposite(1.23, 1_350_000),
-    "Grandview-Woodland":       NeighbourhoodComposite(1.19, 1_310_000),
-    "Kitsilano":                NeighbourhoodComposite(1.18, 1_300_000),
-    "Marpole":                  NeighbourhoodComposite(0.98, 1_080_000),
-    "Fairview":                 NeighbourhoodComposite(0.81,   893_000),
-    "Renfrew-Collingwood":      NeighbourhoodComposite(0.76,   834_000),
-    "Mount Pleasant":           NeighbourhoodComposite(0.74,   808_000),
-    "Strathcona":               NeighbourhoodComposite(0.72,   795_000),
-    "Downtown":                 NeighbourhoodComposite(0.56,   613_000),
-    # Downtown Eastside is not in the cited composite sources; Strathcona
-    # (0.72x, $795,000) is used as the nearest comparable planning area.
-    "Downtown Eastside":        NeighbourhoodComposite(0.72,   795_000),
-    "West End":                 NeighbourhoodComposite(0.55,   610_000),
+NEIGHBOURHOOD_PURCHASE_PRICE_CAD: dict[str, dict[str, int]] = {
+    "Arbutus Ridge": {
+        PropertyCategory.ENTIRE_HOUSES.value: 3_110_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_654_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 1_028_000,
+    },
+    "Cambie Corridor": {
+        PropertyCategory.ENTIRE_HOUSES.value: 2_620_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_600_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 1_020_000,
+    },
+    "Downtown": {
+        PropertyCategory.ENTIRE_HOUSES.value: 1_930_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_080_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 605_000,
+    },
+    "Dunbar-Southlands": {
+        PropertyCategory.ENTIRE_HOUSES.value: 2_860_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_553_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 965_000,
+    },
+    "Fairview": {
+        PropertyCategory.ENTIRE_HOUSES.value: 2_249_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_110_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 797_000,
+    },
+    "Grandview-Woodland": {
+        PropertyCategory.ENTIRE_HOUSES.value: 1_640_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_220_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 589_000,
+    },
+    "Hastings-Sunrise": {
+        PropertyCategory.ENTIRE_HOUSES.value: 1_560_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 820_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 493_000,
+    },
+    "Kensington-Cedar Cottage": {
+        PropertyCategory.ENTIRE_HOUSES.value: 1_580_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_250_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 659_000,
+    },
+    "Kerrisdale": {
+        PropertyCategory.ENTIRE_HOUSES.value: 2_960_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_520_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 979_000,
+    },
+    "Killarney": {
+        PropertyCategory.ENTIRE_HOUSES.value: 1_690_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 826_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 526_000,
+    },
+    "Kitsilano": {
+        PropertyCategory.ENTIRE_HOUSES.value: 2_610_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_180_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 714_000,
+    },
+    "Marpole": {
+        PropertyCategory.ENTIRE_HOUSES.value: 1_890_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_440_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 683_000,
+    },
+    "Mount Pleasant": {
+        PropertyCategory.ENTIRE_HOUSES.value: 1_670_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_060_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 648_000,
+    },
+    "Oakridge": {
+        PropertyCategory.ENTIRE_HOUSES.value: 3_410_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_500_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 993_000,
+    },
+    "Renfrew-Collingwood": {
+        PropertyCategory.ENTIRE_HOUSES.value: 1_490_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 856_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 501_000,
+    },
+    "Riley Park": {
+        PropertyCategory.ENTIRE_HOUSES.value: 1_990_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_090_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 948_000,
+    },
+    "Shaughnessy": {
+        PropertyCategory.ENTIRE_HOUSES.value: 4_820_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_680_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 991_000,
+    },
+    "South Cambie": {
+        PropertyCategory.ENTIRE_HOUSES.value: 4_050_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_410_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 1_030_000,
+    },
+    "Strathcona": {
+        PropertyCategory.ENTIRE_HOUSES.value: 1_470_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 900_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 644_000,
+    },
+    "Sunset": {
+        PropertyCategory.ENTIRE_HOUSES.value: 1_580_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 855_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 530_000,
+    },
+    "UBC": {
+        PropertyCategory.ENTIRE_HOUSES.value: 2_120_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_560_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 996_000,
+    },
+    "Victoria-Fraserview": {
+        PropertyCategory.ENTIRE_HOUSES.value: 1_990_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_058_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 658_000,
+    },
+    "West End": {
+        PropertyCategory.ENTIRE_HOUSES.value: 1_971_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_130_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 601_000,
+    },
+    "West Point Grey": {
+        PropertyCategory.ENTIRE_HOUSES.value: 2_690_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_240_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 736_000,
+    },
 }
 
 # Future scenario scaffold. Do not apply during the preprocessing phase.

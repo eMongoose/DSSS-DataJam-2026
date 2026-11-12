@@ -3,6 +3,8 @@ import unittest
 import pandas as pd
 
 from cleaning import (
+    NEIGHBOURHOOD_PURCHASE_PRICE_CAD,
+    PropertyCategory,
     aggregate_trailing_review_counts,
     categorize_properties,
     clean_currency,
@@ -112,6 +114,60 @@ class PropertyCategoryTests(unittest.TestCase):
     def test_rejects_unexpected_property_category(self):
         with self.assertRaisesRegex(ValueError, "Unexpected property category"):
             encode_property_category("Unknown category")
+
+
+class NeighbourhoodPurchasePriceTests(unittest.TestCase):
+    def test_contains_all_supplied_neighbourhood_and_category_prices(self):
+        expected_neighbourhoods = {
+            "Arbutus Ridge", "Cambie Corridor", "Downtown",
+            "Dunbar-Southlands", "Fairview", "Grandview-Woodland",
+            "Hastings-Sunrise", "Kensington-Cedar Cottage", "Kerrisdale",
+            "Killarney", "Kitsilano", "Marpole", "Mount Pleasant",
+            "Oakridge", "Renfrew-Collingwood", "Riley Park", "Shaughnessy",
+            "South Cambie", "Strathcona", "Sunset", "UBC",
+            "Victoria-Fraserview", "West End", "West Point Grey",
+        }
+        expected_categories = {
+            PropertyCategory.ENTIRE_HOUSES.value,
+            PropertyCategory.ENTIRE_TOWNHOUSES.value,
+            PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value,
+        }
+
+        self.assertEqual(
+            set(NEIGHBOURHOOD_PURCHASE_PRICE_CAD),
+            expected_neighbourhoods,
+        )
+        self.assertEqual(len(NEIGHBOURHOOD_PURCHASE_PRICE_CAD), 24)
+        for neighbourhood, prices in NEIGHBOURHOOD_PURCHASE_PRICE_CAD.items():
+            with self.subTest(neighbourhood=neighbourhood):
+                self.assertEqual(set(prices), expected_categories)
+                self.assertTrue(
+                    all(type(price) is int and price > 0 for price in prices.values())
+                )
+
+    def test_stores_supplied_million_cad_values_as_whole_cad(self):
+        houses = PropertyCategory.ENTIRE_HOUSES.value
+        townhouses = PropertyCategory.ENTIRE_TOWNHOUSES.value
+        apartments = PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value
+
+        self.assertEqual(
+            NEIGHBOURHOOD_PURCHASE_PRICE_CAD["Arbutus Ridge"],
+            {houses: 3_110_000, townhouses: 1_654_000, apartments: 1_028_000},
+        )
+        self.assertEqual(
+            NEIGHBOURHOOD_PURCHASE_PRICE_CAD["Downtown"],
+            {houses: 1_930_000, townhouses: 1_080_000, apartments: 605_000},
+        )
+        self.assertEqual(
+            NEIGHBOURHOOD_PURCHASE_PRICE_CAD["Shaughnessy"],
+            {houses: 4_820_000, townhouses: 1_680_000, apartments: 991_000},
+        )
+
+    def test_does_not_impute_an_unsupplied_downtown_eastside_price(self):
+        self.assertNotIn(
+            "Downtown Eastside",
+            NEIGHBOURHOOD_PURCHASE_PRICE_CAD,
+        )
 
 
 class PropertyNeighbourhoodPercentageTests(unittest.TestCase):
