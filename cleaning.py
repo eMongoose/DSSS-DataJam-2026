@@ -43,7 +43,7 @@ COMPOSITE_BASELINE = NeighbourhoodComposite(multiplier=1.00, price_cad=1_099_100
 NEIGHBOURHOOD_COMPOSITE: dict[str, NeighbourhoodComposite] = {
     "Shaughnessy":              NeighbourhoodComposite(3.58, 3_930_000),
     "Arbutus Ridge":            NeighbourhoodComposite(2.78, 3_050_000),
-    "Dunbar-Southlands":        NeighbourhoodComposite(2.40, 2_640_000),
+    "Dunbar Southlands":        NeighbourhoodComposite(2.40, 2_640_000),
     "West Point Grey":          NeighbourhoodComposite(2.06, 2_260_000),
     "Victoria-Fraserview":      NeighbourhoodComposite(1.82, 2_000_000),
     "Kerrisdale":               NeighbourhoodComposite(1.78, 1_960_000),
@@ -62,6 +62,9 @@ NEIGHBOURHOOD_COMPOSITE: dict[str, NeighbourhoodComposite] = {
     "Mount Pleasant":           NeighbourhoodComposite(0.74,   808_000),
     "Strathcona":               NeighbourhoodComposite(0.72,   795_000),
     "Downtown":                 NeighbourhoodComposite(0.56,   613_000),
+    # Downtown Eastside is not in the cited composite sources; Strathcona
+    # (0.72x, $795,000) is used as the nearest comparable planning area.
+    "Downtown Eastside":        NeighbourhoodComposite(0.72,   795_000),
     "West End":                 NeighbourhoodComposite(0.55,   610_000),
 }
 
