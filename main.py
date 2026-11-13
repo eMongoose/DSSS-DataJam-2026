@@ -208,3 +208,4 @@ prepared_dataset = prepare_listing_dataset(final_df)
 prepared_dataset.to_csv("data/output/listings_cleaned.csv.gz", index=False)
 print("Cleaned dataset rows:", len(prepared_dataset))
 print("Cleaned dataset columns:", prepared_dataset.columns.tolist())
+
