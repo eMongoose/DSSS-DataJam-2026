@@ -7,7 +7,6 @@ import geopandas as gpd
 from cleaning import (
     aggregate_trailing_review_counts,
     categorize_properties,
-    PROPERTY_NEIGHBOURHOOD_PERCENTAGES,
     clean_currency,
     convert_tf_to_boolean,
     convert_to_datetime,
