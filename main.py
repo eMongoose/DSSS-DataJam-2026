@@ -11,7 +11,8 @@ from cleaning import (
     convert_tf_to_boolean,
     convert_to_datetime,
     derive_license_status,
-    prepare_listing_dataset,
+    categorize_properties,
+    encode_property_category,
 )
 
 # =============================================================================
@@ -198,14 +199,26 @@ assert set(listings['license_status'].unique()) == {
     'unknown',
 }
 
+# Additional ROI testing 
+
 print(final_df.columns)
 
 final_df["property_category"] = final_df["property_type"].apply(categorize_properties)
 print(final_df["property_category"].value_counts())
 
-# Keep only the explicit, privacy-safe columns approved for the cleaned dataset.
-prepared_dataset = prepare_listing_dataset(final_df)
-prepared_dataset.to_csv("data/output/listings_cleaned.csv.gz", index=False)
-print("Cleaned dataset rows:", len(prepared_dataset))
-print("Cleaned dataset columns:", prepared_dataset.columns.tolist())
+other_counts = (
+    final_df.loc[final_df["property_category"] == "Other", "property_type"]
+    .value_counts()
+    .sort_values(ascending=False)
+)
+print("Property types in Other:")
+print(other_counts.to_string())
 
+final_df["property_category_code"] = final_df["property_category"].apply(
+    encode_property_category
+)
+
+assert pd.api.types.is_numeric_dtype(final_df["property_category_code"])
+assert set(final_df["property_category_code"].unique()).issubset(set(range(7)))
+
+print(final_df["property_category_code"].value_counts().sort_index())
