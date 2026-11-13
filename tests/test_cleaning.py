@@ -325,5 +325,55 @@ class AggregateTrailingReviewCountsTests(unittest.TestCase):
         )
 
 
+class PrepareListingDatasetTests(unittest.TestCase):
+    def make_listing(self):
+        columns = [
+            "id", "source", "last_scraped", "neighbourhood_cleansed",
+            "property_category", "room_type", "hosts_time_as_host_months",
+            "host_listings_count", "host_is_superhost",
+            "host_identity_verified", "accommodates", "bathrooms", "bedrooms",
+            "beds", "price", "minimum_nights_avg_ntm",
+            "maximum_nights_avg_ntm", "has_availability", "availability_30",
+            "availability_90", "availability_365", "total_available_count",
+            "available_true_count", "review_count", "review_count_30d",
+            "review_count_90d", "review_count_365d", "latest_review_date",
+            "review_scores_rating", "review_scores_accuracy",
+            "review_scores_cleanliness", "review_scores_checkin",
+            "review_scores_communication", "review_scores_location",
+            "review_scores_value", "license_status",
+            "estimated_occupancy_l365d", "estimated_revenue_l365d",
+        ]
+        listing = {column: 1 for column in columns}
+        listing["last_scraped"] = pd.Timestamp("2026-06-15")
+        listing["host_name"] = "must be discarded"
+        listing["listing_url"] = "must be discarded"
+        listing["license"] = "must be discarded"
+        return listing
+
+    def test_keeps_only_explicit_privacy_safe_columns(self):
+        result = prepare_listing_dataset(pd.DataFrame([self.make_listing()]))
+
+        self.assertEqual(result.columns[0], "listing_id")
+        self.assertIn("neighbourhood", result.columns)
+        self.assertIn("calendar_nights_observed", result.columns)
+        self.assertNotIn("id", result.columns)
+        self.assertNotIn("host_name", result.columns)
+        self.assertNotIn("listing_url", result.columns)
+        self.assertNotIn("license", result.columns)
+
+    def test_rejects_missing_required_column(self):
+        listing = self.make_listing()
+        del listing["source"]
+
+        with self.assertRaisesRegex(ValueError, "missing columns: source"):
+            prepare_listing_dataset(pd.DataFrame([listing]))
+
+    def test_rejects_duplicate_listing_ids(self):
+        listing = self.make_listing()
+
+        with self.assertRaisesRegex(ValueError, "duplicate listing IDs"):
+            prepare_listing_dataset(pd.DataFrame([listing, listing]))
+
+
 if __name__ == "__main__":
     unittest.main()

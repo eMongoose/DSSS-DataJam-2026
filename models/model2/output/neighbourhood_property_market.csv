@@ -1,0 +1,115 @@
+neighbourhood,property_category,listings,median_nightly_price,median_occupied_nights,median_annual_revenue,mean_annual_revenue,sample_size_flag
+Oakridge,Shared Rooms,1,1146.88,255.0,292454.0,292454.0,Small sample
+West End,Commercial / Hospitality,3,356.0,246.0,87576.0,79892.0,Small sample
+Killarney,Niche / Unconventional Accommodations,1,468.0,144.0,67392.0,67392.0,Small sample
+Strathcona,Secondary Suites / Guest Units,1,256.2,255.0,65331.0,65331.0,Small sample
+Kensington-Cedar Cottage,Niche / Unconventional Accommodations,1,382.33,138.0,52762.0,52762.0,Small sample
+Mount Pleasant,Secondary Suites / Guest Units,25,273.67,162.0,50387.0,42759.88,OK
+Shaughnessy,Secondary Suites / Guest Units,7,420.0,174.0,49642.0,75341.57142857143,Small sample
+Riley Park,Secondary Suites / Guest Units,81,350.0,150.0,49300.0,50221.62962962963,OK
+Oakridge,Secondary Suites / Guest Units,15,398.27,120.0,48053.0,53813.666666666664,OK
+Renfrew-Collingwood,Niche / Unconventional Accommodations,2,499.5,96.0,47859.0,47859.0,Small sample
+Kitsilano,Secondary Suites / Guest Units,63,381.15,138.0,46581.0,49473.30158730159,OK
+Fairview,Entire Houses / Townhouses,9,430.0,60.0,46242.0,648793.1111111111,Small sample
+Kerrisdale,Secondary Suites / Guest Units,14,292.56,147.0,45144.0,45623.642857142855,OK
+West End,Secondary Suites / Guest Units,2,259.58000000000004,163.5,44690.5,44690.5,Small sample
+Grandview-Woodland,Secondary Suites / Guest Units,47,285.33,180.0,40749.0,44882.55319148936,OK
+Marpole,Secondary Suites / Guest Units,22,215.225,192.0,40135.5,42881.27272727273,OK
+Renfrew-Collingwood,Secondary Suites / Guest Units,67,260.5,150.0,37884.0,41411.014925373136,OK
+Hastings-Sunrise,Secondary Suites / Guest Units,77,262.47,156.0,36500.0,43275.72727272727,OK
+Arbutus Ridge,Secondary Suites / Guest Units,27,351.0,96.0,36114.0,39005.37037037037,OK
+Victoria-Fraserview,Entire Apartment / Condos,2,355.59000000000003,126.0,34839.5,34839.5,Small sample
+Downtown Eastside,Entire Apartment / Condos,308,398.385,90.0,34263.0,47688.17857142857,OK
+South Cambie,Entire Houses / Townhouses,24,537.025,57.0,33267.0,39239.708333333336,OK
+Kensington-Cedar Cottage,Secondary Suites / Guest Units,99,256.77,138.0,32352.0,35512.333333333336,OK
+South Cambie,Secondary Suites / Guest Units,15,319.53,102.0,32256.0,40991.6,OK
+Kitsilano,Entire Houses / Townhouses,165,579.79,48.0,29400.0,46449.71515151515,OK
+Grandview-Woodland,Private Rooms,31,182.59,204.0,29325.0,29909.58064516129,OK
+Marpole,Niche / Unconventional Accommodations,1,216.0,132.0,28512.0,28512.0,Small sample
+Dunbar Southlands,Secondary Suites / Guest Units,48,306.41999999999996,102.0,27217.0,35688.645833333336,OK
+West End,Entire Houses / Townhouses,8,349.0,33.0,26899.0,35519.125,Small sample
+Victoria-Fraserview,Entire Houses / Townhouses,107,352.0,78.0,26674.0,41428.457943925234,OK
+South Cambie,Entire Apartment / Condos,2,262.0,120.0,26520.0,26520.0,Small sample
+Shaughnessy,Entire Apartment / Condos,7,269.0,66.0,26469.0,21058.285714285714,Small sample
+Downtown Eastside,Private Rooms,21,285.33,90.0,25882.0,31268.666666666668,OK
+Sunset,Secondary Suites / Guest Units,44,270.17499999999995,102.0,24884.0,32811.068181818184,OK
+Renfrew-Collingwood,Entire Houses / Townhouses,112,327.805,75.0,23484.0,35512.6875,OK
+Killarney,Entire Houses / Townhouses,52,362.5,66.0,23237.5,37844.730769230766,OK
+Downtown,Commercial / Hospitality,15,443.0,60.0,22966.0,55986.0,OK
+Arbutus Ridge,Entire Houses / Townhouses,55,535.5,54.0,22965.0,47963.8,OK
+Kerrisdale,Entire Houses / Townhouses,39,480.0,42.0,22890.0,45058.97435897436,OK
+Downtown,Entire Houses / Townhouses,13,422.6,24.0,22572.0,57484.61538461538,OK
+Hastings-Sunrise,Entire Houses / Townhouses,139,346.5,60.0,22512.0,38852.07913669065,OK
+Kensington-Cedar Cottage,Entire Houses / Townhouses,179,412.13,60.0,21363.0,36137.31284916201,OK
+Riley Park,Niche / Unconventional Accommodations,1,322.19,66.0,21265.0,21265.0,Small sample
+Downtown Eastside,Secondary Suites / Guest Units,11,231.66,108.0,21075.0,25056.454545454544,OK
+Riley Park,Entire Houses / Townhouses,117,501.81,42.0,20340.0,36191.03418803419,OK
+Downtown,Entire Apartment / Condos,1275,390.5,78.0,19128.0,42514.78196078431,OK
+Oakridge,Entire Houses / Townhouses,41,528.5,36.0,18912.0,68266.56097560975,OK
+Victoria-Fraserview,Secondary Suites / Guest Units,35,255.63,90.0,18282.0,27433.8,OK
+West Point Grey,Secondary Suites / Guest Units,19,302.41,60.0,18172.0,25537.842105263157,OK
+Dunbar Southlands,Entire Houses / Townhouses,114,478.645,36.0,17379.0,32588.429824561405,OK
+West Point Grey,Entire Houses / Townhouses,61,559.5,36.0,16758.0,48244.262295081964,OK
+Marpole,Entire Houses / Townhouses,73,404.0,54.0,15936.0,38788.72602739726,OK
+Kerrisdale,Entire Apartment / Condos,2,413.915,45.0,15845.0,15845.0,Small sample
+Kensington-Cedar Cottage,Entire Apartment / Condos,17,244.67,162.0,15844.0,25591.941176470587,OK
+Hastings-Sunrise,Niche / Unconventional Accommodations,3,275.0,66.0,15554.0,25534.666666666668,Small sample
+Riley Park,Entire Apartment / Condos,22,308.07,84.0,15353.5,29029.045454545456,OK
+Downtown Eastside,Commercial / Hospitality,4,312.1,51.0,14733.0,14137.25,Small sample
+Strathcona,Entire Apartment / Condos,19,377.0,108.0,14502.0,36768.10526315789,OK
+Shaughnessy,Entire Houses / Townhouses,34,905.425,30.0,14018.5,48107.94117647059,OK
+Dunbar Southlands,Shared Rooms,1,331.0,42.0,13902.0,13902.0,Small sample
+Killarney,Secondary Suites / Guest Units,29,271.0,54.0,13470.0,26134.206896551725,OK
+West Point Grey,Entire Apartment / Condos,6,333.33500000000004,105.0,12661.0,47446.0,Small sample
+Hastings-Sunrise,Entire Apartment / Condos,15,194.0,78.0,12079.0,21482.666666666668,OK
+Sunset,Entire Houses / Townhouses,116,318.0,36.0,12042.5,24355.48275862069,OK
+Downtown Eastside,Entire Houses / Townhouses,47,582.14,42.0,11691.0,33218.425531914894,OK
+Arbutus Ridge,Entire Apartment / Condos,7,274.0,30.0,10368.0,14101.142857142857,Small sample
+Grandview-Woodland,Entire Houses / Townhouses,97,416.53,36.0,9612.0,28431.17525773196,OK
+Downtown,Shared Rooms,7,99.0,72.0,9552.0,20287.714285714286,Small sample
+Sunset,Entire Apartment / Condos,7,205.0,78.0,8940.0,22175.571428571428,Small sample
+Strathcona,Private Rooms,2,614.0,15.0,8571.0,8571.0,Small sample
+West Point Grey,Niche / Unconventional Accommodations,1,253.0,30.0,7590.0,7590.0,Small sample
+Mount Pleasant,Entire Houses / Townhouses,59,402.0,18.0,7458.0,34143.542372881355,OK
+Kitsilano,Entire Apartment / Condos,107,278.4,42.0,7191.0,21828.28971962617,OK
+South Cambie,Private Rooms,15,198.56,30.0,7139.0,22023.533333333333,OK
+Fairview,Secondary Suites / Guest Units,2,32.235,217.5,6956.0,6956.0,Small sample
+Mount Pleasant,Entire Apartment / Condos,172,227.12,48.0,6865.5,22451.04651162791,OK
+Kitsilano,Niche / Unconventional Accommodations,1,205.5,30.0,6165.0,6165.0,Small sample
+Renfrew-Collingwood,Commercial / Hospitality,1,337.0,18.0,6066.0,6066.0,Small sample
+Fairview,Entire Apartment / Condos,90,48.665,54.0,6029.0,12009.988888888889,OK
+Riley Park,Private Rooms,42,181.975,66.0,5520.0,15110.666666666666,OK
+Oakridge,Private Rooms,41,165.0,24.0,5136.0,10987.634146341463,OK
+Kitsilano,Private Rooms,45,160.0,66.0,5081.0,15081.266666666666,OK
+Grandview-Woodland,Entire Apartment / Condos,44,282.98,15.0,4867.0,16437.113636363636,OK
+Dunbar Southlands,Niche / Unconventional Accommodations,2,332.59000000000003,18.0,4827.0,4827.0,Small sample
+Kerrisdale,Private Rooms,32,160.88,24.0,4474.5,10981.40625,OK
+Marpole,Private Rooms,57,143.0,24.0,4292.0,13648.859649122807,OK
+Dunbar Southlands,Entire Apartment / Condos,6,260.5,15.0,4218.0,13087.0,Small sample
+Victoria-Fraserview,Private Rooms,33,112.98,18.0,4188.0,10755.0,OK
+Dunbar Southlands,Private Rooms,109,183.0,18.0,4032.0,11518.853211009175,OK
+Shaughnessy,Private Rooms,37,231.66,24.0,3624.0,13938.405405405405,OK
+Killarney,Private Rooms,20,151.20499999999998,9.0,3369.0,8396.05,OK
+Renfrew-Collingwood,Private Rooms,49,132.0,102.0,3307.0,11898.265306122448,OK
+Kensington-Cedar Cottage,Private Rooms,67,164.5,12.0,3302.0,12694.208955223881,OK
+Renfrew-Collingwood,Entire Apartment / Condos,15,262.67,12.0,3210.0,7604.0,OK
+Arbutus Ridge,Private Rooms,45,239.65,18.0,2736.0,18427.533333333333,OK
+Oakridge,Entire Apartment / Condos,10,315.8,3.0,1032.0,1964.8,OK
+Sunset,Private Rooms,42,166.0,3.0,378.0,8810.42857142857,OK
+Downtown Eastside,Niche / Unconventional Accommodations,3,252.5,0.0,0.0,2020.0,Small sample
+Killarney,Entire Apartment / Condos,8,72.55,0.0,0.0,11367.625,Small sample
+Hastings-Sunrise,Private Rooms,87,17.62,0.0,0.0,5460.64367816092,OK
+Fairview,Niche / Unconventional Accommodations,1,5763.0,0.0,0.0,0.0,Small sample
+Fairview,Private Rooms,5,319.67,0.0,0.0,5336.0,Small sample
+Downtown,Private Rooms,74,52.72,0.0,0.0,40277.7972972973,OK
+Downtown,Niche / Unconventional Accommodations,4,1539.6950000000002,0.0,0.0,37605.0,Small sample
+Arbutus Ridge,Shared Rooms,1,216.18,0.0,0.0,0.0,Small sample
+Mount Pleasant,Private Rooms,95,29.06,0.0,0.0,5695.6736842105265,OK
+Marpole,Shared Rooms,1,420.0,0.0,0.0,0.0,Small sample
+Marpole,Entire Apartment / Condos,18,67.025,0.0,0.0,15458.222222222223,OK
+Shaughnessy,Commercial / Hospitality,1,1860.0,0.0,0.0,0.0,Small sample
+Sunset,Shared Rooms,2,81.5,0.0,0.0,0.0,Small sample
+West End,Entire Apartment / Condos,199,223.16,0.0,0.0,20636.381909547737,OK
+West End,Private Rooms,22,56.72,0.0,0.0,14475.818181818182,OK
+West Point Grey,Private Rooms,46,142.0,0.0,0.0,3634.7391304347825,OK
+West Point Grey,Shared Rooms,1,220.93,0.0,0.0,0.0,Small sample
