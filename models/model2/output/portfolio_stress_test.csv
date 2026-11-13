@@ -1,0 +1,7 @@
+Strategy,Scenario,2027 Revenue,2027 Cash Flow,How much money we have left at the end of the year,Budget Feasible
+All Cash,Pessimistic,133616.0,93531.20000000001,1745341.2,True
+All Cash,Base,190880.0,133616.0,1785426.0,True
+All Cash,Optimistic,248144.0,173700.8,1825510.8,True
+Mortgage,Pessimistic,115296.29999999999,-514094.25035304145,1061365.7496469584,True
+Mortgage,Base,164709.0,-479505.3603530415,1095954.6396469586,True
+Mortgage,Optimistic,214121.7,-444916.4703530415,1130543.5296469585,True

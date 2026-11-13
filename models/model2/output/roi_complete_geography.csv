@@ -1,0 +1,28 @@
+neighbourhood,property_category,listings,median_nightly_price,median_occupied_nights,median_annual_revenue,mean_annual_revenue,sample_size_flag,assessment_legal_type,assessed_price_proxy,assessment_property_count,gross_yield_proxy,price_match_status,match_method
+Arbutus Ridge,Entire Houses,52,509.255,48.0,18138.0,42329.67307692308,OK,LAND,3362000.0,2927.0,0.005395002974419988,Matched,Approximate area proxy
+Downtown,Entire Apartments / Condos,1275,390.5,78.0,19128.0,42514.78196078431,OK,STRATA,643000.0,16984.0,0.02974805598755832,Matched,Exact name
+Downtown Eastside,Entire Apartments / Condos,308,398.385,90.0,34263.0,47688.17857142857,OK,STRATA,1526500.0,2904.0,0.02244546347854569,Matched,Approximate area proxy
+Downtown Eastside,Entire Houses,45,582.14,42.0,13286.0,34694.8,OK,LAND,1685000.0,4772.0,0.00788486646884273,Matched,Approximate area proxy
+Dunbar Southlands,Entire Houses,114,478.645,36.0,17379.0,32588.429824561405,OK,LAND,3248000.0,6323.0,0.0053506773399014775,Matched,Approximate area proxy
+Fairview,Entire Apartments / Condos,90,48.665,54.0,6029.0,12009.988888888889,OK,STRATA,870424.5,12244.0,0.006926505400525835,Matched,Exact name
+Grandview-Woodland,Entire Apartments / Condos,44,282.98,15.0,4867.0,16437.113636363636,OK,STRATA,692000.0,5812.0,0.007033236994219653,Matched,Approximate area proxy
+Grandview-Woodland,Entire Houses,93,416.53,36.0,9252.0,27616.2688172043,OK,LAND,1872800.0,4782.0,0.004940196497223409,Matched,Approximate area proxy
+Hastings-Sunrise,Entire Houses,138,353.25,60.0,22909.0,39133.615942028984,OK,LAND,1683400.0,4684.0,0.013608767969585362,Matched,Approximate area proxy
+Kensington-Cedar Cottage,Entire Houses,175,412.0,60.0,21363.0,36310.37142857143,OK,LAND,1964000.0,3108.0,0.010877291242362525,Matched,Approximate area proxy
+Kerrisdale,Entire Houses,39,480.0,42.0,22890.0,45058.97435897436,OK,LAND,3421000.0,2792.0,0.006691026015784858,Matched,Exact name
+Killarney,Entire Houses,52,362.5,66.0,23237.5,37844.730769230766,OK,LAND,1981500.0,4710.0,0.011727226848347212,Matched,Exact name
+Kitsilano,Entire Apartments / Condos,107,278.4,42.0,7191.0,21828.28971962617,OK,STRATA,930373.5,10638.0,0.007729153936564186,Matched,Exact name
+Kitsilano,Entire Houses,151,579.79,48.0,31483.0,47895.496688741725,OK,LAND,2845000.0,4404.0,0.011066080843585237,Matched,Exact name
+Marpole,Entire Houses,69,404.0,72.0,16200.0,38672.17391304348,OK,LAND,2301550.0,2752.0,0.007038734765701375,Matched,Exact name
+Mount Pleasant,Entire Apartments / Condos,172,227.12,48.0,6865.5,22451.04651162791,OK,STRATA,727000.0,15441.0,0.009443603851444292,Matched,Exact name
+Mount Pleasant,Entire Houses,55,403.5,24.0,8622.0,36290.38181818182,OK,LAND,2137000.0,3530.0,0.004034627983153954,Matched,Exact name
+Oakridge,Entire Houses,40,532.25,39.0,19110.5,69973.225,OK,LAND,3266000.0,1371.0,0.0058513472137170855,Matched,Exact name
+Renfrew-Collingwood,Entire Houses,109,326.95,66.0,23280.0,34716.97247706422,OK,LAND,1792350.0,8660.0,0.01298853460540631,Matched,Approximate area proxy
+Riley Park,Entire Apartments / Condos,22,308.07,84.0,15353.5,29029.045454545456,OK,STRATA,838000.0,1787.0,0.01832159904534606,Matched,Approximate area proxy
+Riley Park,Entire Houses,108,450.45500000000004,39.0,20187.0,35015.61111111111,OK,LAND,1970000.0,5130.0,0.010247208121827412,Matched,Approximate area proxy
+Shaughnessy,Entire Houses,33,897.85,30.0,13854.0,48071.757575757576,OK,LAND,4949100.0,2010.0,0.0027992968418500334,Matched,Exact name
+South Cambie,Entire Houses,24,537.025,57.0,33267.0,39239.708333333336,OK,LAND,3029000.0,2905.0,0.010982832618025752,Matched,Approximate area proxy
+Sunset,Entire Houses,114,318.0,36.0,12042.5,24667.98245614035,OK,LAND,1886900.0,5663.0,0.006382161216810641,Matched,Approximate area proxy
+Victoria-Fraserview,Entire Houses,103,349.0,84.0,27702.0,41721.69902912621,OK,LAND,2228050.0,2626.0,0.012433293687305043,Matched,Approximate area proxy
+West End,Entire Apartments / Condos,199,223.16,0.0,0.0,20636.381909547737,OK,STRATA,821571.0,8389.0,0.0,Matched,Exact name
+West Point Grey,Entire Houses,61,559.5,36.0,16758.0,48244.262295081964,OK,LAND,3388500.0,3444.0,0.004945551128818061,Matched,Approximate area proxy
