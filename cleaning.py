@@ -346,14 +346,3 @@ def encode_property_category(property_category):
         ) from exc
 
 
-def get_property_neighbourhood_percentage(
-    neighbourhood,
-    property_category,
-    percentages=None,
-):
-    """Return the configured row-level percentage, or 0.0 when absent."""
-    if percentages is None:
-        percentages = PROPERTY_NEIGHBOURHOOD_PERCENTAGES
-
-    neighbourhood_percentages = percentages.get(neighbourhood, {})
-    return float(neighbourhood_percentages.get(property_category, 0.0))
