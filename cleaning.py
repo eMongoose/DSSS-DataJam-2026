@@ -39,6 +39,11 @@ NEIGHBOURHOOD_PURCHASE_PRICE_CAD: dict[str, dict[str, int]] = {
         PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_080_000,
         PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 605_000,
     },
+    "Downtown-Eastside": {
+        PropertyCategory.ENTIRE_HOUSES.value: 1_700_000,
+        PropertyCategory.ENTIRE_TOWNHOUSES.value: 990_000,
+        PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 624_500,
+    },
     "Dunbar-Southlands": {
         PropertyCategory.ENTIRE_HOUSES.value: 2_860_000,
         PropertyCategory.ENTIRE_TOWNHOUSES.value: 1_553_000,
@@ -145,6 +150,52 @@ NEIGHBOURHOOD_PURCHASE_PRICE_CAD: dict[str, dict[str, int]] = {
         PropertyCategory.ENTIRE_APARTMENTS_CONDOS.value: 736_000,
     },
 }
+
+
+ADU_PRIVATE_ROOM_PRICES_CAD = {
+    "Arbutus Ridge": (834_000, 313_000),
+    "Cambie Corridor": (None, None),
+    "Downtown": (562_000, 193_000),
+    "Downtown-Eastside": (500_000, 391_000),
+    "Dunbar-Southlands": (765_000, 279_000),
+    "Fairview": (581_000, 251_000),
+    "Grandview-Woodland": (520_000, 187_000),
+    "Hastings-Sunrise": (418_000, 153_000),
+    "Kensington-Cedar Cottage": (481_000, 194_000),
+    "Kerrisdale": (791_000, 296_000),
+    "Killarney": (437_000, 161_000),
+    "Kitsilano": (652_000, 228_000),
+    "Marpole": (581_000, 214_000),
+    "Mount Pleasant": (520_000, 205_000),
+    "Oakridge": (890_000, 317_000),
+    "Renfrew-Collingwood": (404_000, 154_000),
+    "Riley Park": (537_000, 250_000),
+    "Shaughnessy": (1_261_000, 421_000),
+    "South Cambie": (1_011_000, 340_000),
+    "Strathcona": (437_000, 198_000),
+    "Sunset": (426_000, 153_000),
+    "UBC": (None, None),
+    "Victoria-Fraserview": (534_000, 200_000),
+    "West End": (576_000, 191_000),
+    "West Point Grey": (715_000, 247_000),
+}
+
+for neighbourhood, (adu_price, room_price) in (
+    ADU_PRIVATE_ROOM_PRICES_CAD.items()
+):
+    prices = NEIGHBOURHOOD_PURCHASE_PRICE_CAD[neighbourhood]
+
+    if adu_price is not None:
+        prices[
+            PropertyCategory.SECONDARY_SUITES_GUEST_UNITS.value
+        ] = adu_price
+
+    if room_price is not None:
+        prices[
+            PropertyCategory.PRIVATE_ROOMS.value
+        ] = room_price
+        
+        
 
 def clean_currency(series):
     """Convert currency-formatted values to numeric values."""

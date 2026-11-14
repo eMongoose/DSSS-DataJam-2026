@@ -4,6 +4,8 @@
 import pandas as pd
 import geopandas as gpd
 
+
+
 from cleaning import (
     aggregate_trailing_review_counts,
     categorize_properties,
@@ -222,3 +224,6 @@ assert pd.api.types.is_numeric_dtype(final_df["property_category_code"])
 assert set(final_df["property_category_code"].unique()).issubset(set(range(7)))
 
 print(final_df["property_category_code"].value_counts().sort_index())
+
+
+final_df.to_csv('data/output/final_df.csv')
