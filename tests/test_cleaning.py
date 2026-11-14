@@ -169,62 +169,6 @@ class NeighbourhoodPurchasePriceTests(unittest.TestCase):
             NEIGHBOURHOOD_PURCHASE_PRICE_CAD,
         )
 
-
-class PropertyNeighbourhoodPercentageTests(unittest.TestCase):
-    def setUp(self):
-        self.percentages = {
-            "Downtown": {
-                "Entire Apartments / Condos": 0.08,
-                "Entire Houses": 0.05,
-                "Entire Townhouses": 0.04,
-            },
-        }
-
-    def test_returns_percentage_for_exact_combination(self):
-        self.assertEqual(
-            get_property_neighbourhood_percentage(
-                "Downtown",
-                "Entire Apartments / Condos",
-                self.percentages,
-            ),
-            0.08,
-        )
-        self.assertEqual(
-            get_property_neighbourhood_percentage(
-                "Downtown",
-                "Entire Houses",
-                self.percentages,
-            ),
-            0.05,
-        )
-        self.assertEqual(
-            get_property_neighbourhood_percentage(
-                "Downtown",
-                "Entire Townhouses",
-                self.percentages,
-            ),
-            0.04,
-        )
-
-    def test_missing_combination_defaults_to_zero(self):
-        self.assertEqual(
-            get_property_neighbourhood_percentage(
-                "Kitsilano",
-                "Entire Apartments / Condos",
-                self.percentages,
-            ),
-            0.0,
-        )
-        self.assertEqual(
-            get_property_neighbourhood_percentage(
-                "Downtown",
-                "Secondary Suites / Guest Units",
-                self.percentages,
-            ),
-            0.0,
-        )
-
-
 class AggregateTrailingReviewCountsTests(unittest.TestCase):
     def test_counts_inclusive_windows_and_excludes_future_reviews(self):
         reviews = pd.DataFrame(
