@@ -12,7 +12,6 @@ from cleaning import (
     convert_to_datetime,
     derive_license_status,
     encode_property_category,
-    get_property_neighbourhood_percentage,
 )
 
 
