@@ -6,6 +6,8 @@ Data-Driven Developments (DDD), a fictional private real estate fund, will put $
 # The Scenario
 We are an analytics consultancy retained by DDD. The fund has a $10M CAD mandate to deploy into BC short-term rental property, with a stated preference for Metro Vancouver. The committee does not want a model. They want a decision, a number and a reason to believe us.
 
+<div align='center'>
+
 | Item | Detail |
 | :---: | :---: |
 | Client | Data-Driven Developments (DDD), a fictional private real estate fund |
@@ -16,6 +18,8 @@ We are an analytics consultancy retained by DDD. The fund has a $10M CAD mandate
 | Your call|Where, how many properties, what type and mix|
 | Central trade-off|Few high-value properties vs. many modest ones|
 | Audience|DDD's investment committee (the judges)|
+
+</div>
 
 # The Vancouver Neighbourhoods
 
@@ -32,18 +36,6 @@ We are an analytics consultancy retained by DDD. The fund has a $10M CAD mandate
 │          └── output/
 │          └── cleaning.py              # A shorter path for cleaning. A clone of the root directory one.
 │          └── investment_roi.ipynb     # The fun stuff happens here
-├── src/
-│    ├── output/
-│    ├── supplementary_data/ 
-│    │     ├── output/
-│    │     ├── cs_housing_market_info.py
-│    │     ├── cs_num_units_by_building_size.py
-│    │     ├── cs_percentile_rents_small_centres.py
-│    │     ├── cs_rent_quartiles.py
-│    │     ├── cs_vacancy_rates.py
-│    │     └── README.md
-│    ├── map_neighbourhoods_CMHC.zones.py
-│    └── merge_clean_suppementary_data.py
 ├── tests/
 ├── .env                                # Not shared
 ├── .gitignore
