@@ -77,39 +77,39 @@ Data Retrieved from: [Inside Airbnb, Get the Data](https://insideairbnb.com/get-
 Inside Airbnb, Vancouver, 15 June 2026, CC BY 4.0.
 
 ## Other sources
-[The different types of taxes](https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/t4036/rental-income.html)
+[Canada Revenue Agency](https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/t4036/rental-income.html)
 
-[](https://members.gvrealtors.ca/news/GVR-Stats-Package-June-2026-1.pdf)
+[Greator Vancouver REALTORS](https://members.gvrealtors.ca/news/GVR-Stats-Package-June-2026-1.pdf)
 
-[](https://www.zealty.ca/blog/laneway-house-vancouver)
+[Zealty Online Search Inc.](https://www.zealty.ca/blog/laneway-house-vancouver)
 
-[](https://vancouvergeneralcontractors.com/laneway-house-financing-vancouver/)
+[Vancouver General Contractors](https://vancouvergeneralcontractors.com/laneway-house-financing-vancouver/)
 
-[](https://vancouver.ca/home-property-development/flat-rates.aspx)
+[City of Vancouver](https://vancouver.ca/home-property-development/flat-rates.aspx)
 
-[](https://www.bchydro.com/content/dam/BCHydro/customer-portal/documents/corporate/tariff-filings/electric-tariff/bchydro-electric-tariff.pdf)
+[BC hydro](https://www.bchydro.com/content/dam/BCHydro/customer-portal/documents/corporate/tariff-filings/electric-tariff/bchydro-electric-tariff.pdf)
 
-[](https://council.vancouver.ca/20150721/documents/phea-YellowMemo-Appendix2.pdf)
+[City of Vancouver - City Council](https://council.vancouver.ca/20150721/documents/phea-YellowMemo-Appendix2.pdf)
 
-[](https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1810000401)
+[Statistics Canada](https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1810000401)
 
-[](https://vancouver.ca/home-property-development/residential.aspx)
+[City of Vancouver](https://vancouver.ca/home-property-development/residential.aspx)
 
-[](https://info.bcassessment.ca/news/Pages/Lower-Mainland-2026-Property-Assessments-Announced.aspx)
+[BC Assessment](https://info.bcassessment.ca/news/Pages/Lower-Mainland-2026-Property-Assessments-Announced.aspx)
 
-[](https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=4610009201&pickMembers%5B0%5D=2.5&cubeTimeFrame.startMonth=04&cubeTimeFrame.startYear=2026&cubeTimeFrame.endMonth=04&cubeTimeFrame.endYear=2026&referencePeriods=20260401%2C20260401)
+[Statistics Canada](https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=4610009201&pickMembers%5B0%5D=2.5&cubeTimeFrame.startMonth=04&cubeTimeFrame.startYear=2026&cubeTimeFrame.endMonth=04&cubeTimeFrame.endYear=2026&referencePeriods=20260401%2C20260401)
 
-[](https://www.bchydro.com/powersmart/residential/energy-explained.html)
+[BC Hydro](https://www.bchydro.com/powersmart/residential/energy-explained.html)
 
-[](https://hvi.hvs.com/DocumentDownload/3892.pdf)
+[Hospitality Valuation Services](https://hvi.hvs.com/DocumentDownload/3892.pdf)
 
-[](https://www.aparnakapur.com/market)
+[Aparna Kapur](https://www.aparnakapur.com/market)
 
-[](https://www150.statcan.gc.ca/n1/pub/11-621-m/11-621-m2024010-eng.htm)
+[Statistics Canada](https://www150.statcan.gc.ca/n1/pub/11-621-m/11-621-m2024010-eng.htm)
 
-[](https://www150.statcan.gc.ca/n1/pub/11-621-m/11-621-m2023008-eng.pdf)
+[Statistics Canada](https://www150.statcan.gc.ca/n1/pub/11-621-m/11-621-m2023008-eng.pdf)
 
-[](https://www.airroi.com/glossary/operating-expenses)
+[AirROI](https://www.airroi.com/glossary/operating-expenses)
 
-[](https://e2gold.ca/guides/vancouver-home-prices/)
+[e2gold.ca - Canadian Money & Markets](https://e2gold.ca/guides/vancouver-home-prices/)
 
