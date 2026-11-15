@@ -79,11 +79,6 @@ Running this notebook is REQUIRED in order to reproduce the data provided in the
 The notebook is located in ``models/model2/investment_roi.ipynb``
 
 
-
-
-
-
-
 # References and Acknowledgements
 
 Data Retrieved from: [Inside Airbnb, Get the Data](https://insideairbnb.com/get-the-data/)
