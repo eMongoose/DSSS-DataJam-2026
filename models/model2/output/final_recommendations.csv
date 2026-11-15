@@ -1,4 +1,0 @@
-strategy,tax_scenario,appreciation_scenario,appreciation_rate,properties,purchase_value,property_value_change,2027_wealth_change,fund_roi_pct,ending_fund_value
-Cash,City EHT + BC SVT,Stabilization,0.0,8,7839000.0,0.0,-434582.39424500003,-4.34582394245,9565417.605755
-Cash,City EHT only,Stabilization,0.0,8,7839000.0,0.0,-356192.39424500003,-3.56192394245,9643807.605755
-Cash,No vacancy taxes (exemption assumed),Stabilization,0.0,8,7839000.0,0.0,-121022.39424499999,-1.2102239424499999,9878977.605755

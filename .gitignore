@@ -8,6 +8,8 @@ __pycache__/
 # Supplementary data output
 # src/supplementary_data/output/*
 
+models/model2/output/*
+
 
 
 !.gitkeep

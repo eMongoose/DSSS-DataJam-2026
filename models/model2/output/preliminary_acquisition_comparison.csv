@@ -1,8 +1,0 @@
-neighbourhood,property_category,listings,median_nightly_price,median_occupied_nights,median_annual_revenue,mean_annual_revenue,sample_size_flag,acquisition_category,assessed_price_proxy,properties,required_proxy,gross_yield_proxy
-Kerrisdale,Entire Houses,39,480.0,42.0,22890.0,45058.97435897436,OK,Land Property Proxy,3421000.0,2792.0,Land Property Proxy,0.006691026015784858
-Killarney,Entire Houses,52,362.5,66.0,23237.5,37844.730769230766,OK,Land Property Proxy,1981500.0,4710.0,Land Property Proxy,0.011727226848347212
-Kitsilano,Entire Houses,151,579.79,48.0,31483.0,47895.496688741725,OK,Land Property Proxy,2845000.0,4404.0,Land Property Proxy,0.011066080843585237
-Marpole,Entire Houses,69,404.0,72.0,16200.0,38672.17391304348,OK,Land Property Proxy,2301550.0,2752.0,Land Property Proxy,0.007038734765701375
-Mount Pleasant,Entire Houses,55,403.5,24.0,8622.0,36290.38181818182,OK,Land Property Proxy,2137000.0,3530.0,Land Property Proxy,0.004034627983153954
-Oakridge,Entire Houses,40,532.25,39.0,19110.5,69973.225,OK,Land Property Proxy,3266000.0,1371.0,Land Property Proxy,0.0058513472137170855
-Shaughnessy,Entire Houses,33,897.85,30.0,13854.0,48071.757575757576,OK,Land Property Proxy,4949100.0,2010.0,Land Property Proxy,0.0027992968418500334
