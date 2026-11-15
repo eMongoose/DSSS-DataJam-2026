@@ -7,7 +7,7 @@ Data-Driven Developments (DDD), a fictional private real estate fund, will put $
 We are an analytics consultancy retained by DDD. The fund has a $10M CAD mandate to deploy into BC short-term rental property, with a stated preference for Metro Vancouver. The committee does not want a model. They want a decision, a number and a reason to believe us.
 
 | Item | Detail |
-| :--- : :---: |
+| :--- :| :---: |
 | Client | Data-Driven Developments (DDD), a fictional private real estate fund |
 | Mandate|Deploy $10M CAD into BC short-term rental property|
 | Stated preference |Metro Vancouver|
