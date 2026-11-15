@@ -78,37 +78,72 @@ Inside Airbnb, Vancouver, 15 June 2026, CC BY 4.0.
 ## Other sources
 [Canada Revenue Agency](https://www.canada.ca/en/revenue-agency/services/forms-publications/publications/t4036/rental-income.html)
 
+Rental Income taxation rules
+
 [Greator Vancouver REALTORS](https://members.gvrealtors.ca/news/GVR-Stats-Package-June-2026-1.pdf)
+
+June 2026 benchmark prices
 
 [Zealty Online Search Inc.](https://www.zealty.ca/blog/laneway-house-vancouver)
 
+Average Vancouver laneway home rent
+
 [Vancouver General Contractors](https://vancouvergeneralcontractors.com/laneway-house-financing-vancouver/)
+
+Estimated vacancy and capitalization rates
 
 [City of Vancouver](https://vancouver.ca/home-property-development/flat-rates.aspx)
 
+Water, sewer, and garbage expenses
+
 [BC hydro](https://www.bchydro.com/content/dam/BCHydro/customer-portal/documents/corporate/tariff-filings/electric-tariff/bchydro-electric-tariff.pdf)
+
+Electricity costs
 
 [City of Vancouver - City Council](https://council.vancouver.ca/20150721/documents/phea-YellowMemo-Appendix2.pdf)
 
+Insurance and maintenance costs
+
 [Statistics Canada](https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1810000401)
+
+Consumer Price Index data used to adjust 2015 costs to 2026
 
 [City of Vancouver](https://vancouver.ca/home-property-development/residential.aspx)
 
+Residential property tax rates 2026
+
 [BC Assessment](https://info.bcassessment.ca/news/Pages/Lower-Mainland-2026-Property-Assessments-Announced.aspx)
+
+Assessed property values used to estimate property taxes
 
 [Statistics Canada](https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=4610009201&pickMembers%5B0%5D=2.5&cubeTimeFrame.startMonth=04&cubeTimeFrame.startYear=2026&cubeTimeFrame.endMonth=04&cubeTimeFrame.endYear=2026&referencePeriods=20260401%2C20260401)
 
+Average Vancouver private room rent
+
 [BC Hydro](https://www.bchydro.com/powersmart/residential/energy-explained.html)
+
+Average househould electrcitiy consumption
 
 [Hospitality Valuation Services](https://hvi.hvs.com/DocumentDownload/3892.pdf)
 
+Estimated hotel room values
+
 [Aparna Kapur](https://www.aparnakapur.com/market)
+
+Neighbourhood specific benchmark prices
 
 [Statistics Canada](https://www150.statcan.gc.ca/n1/pub/11-621-m/11-621-m2024010-eng.htm)
 
+Research on short term rentals and effects on housing supply
+
 [Statistics Canada](https://www150.statcan.gc.ca/n1/pub/11-621-m/11-621-m2023008-eng.pdf)
+
+Research on growth of short term rental revenue
 
 [AirROI](https://www.airroi.com/glossary/operating-expenses)
 
+Short term rental operating expense ranges
+
 [e2gold.ca - Canadian Money & Markets](https://e2gold.ca/guides/vancouver-home-prices/)
 
+Vancouver housing market trends
